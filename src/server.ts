@@ -12,6 +12,12 @@ const PORT = process.env.PORT || 3000;
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, "../public")));
 
+// Serve static files from dist directory
+app.use('/dist', express.static(path.join(__dirname, "../dist")));
+
+// Serve static files from assets directory
+app.use('/assets', express.static(path.join(__dirname, "../assets")));
+
 // Parse JSON bodies
 app.use(express.json());
 

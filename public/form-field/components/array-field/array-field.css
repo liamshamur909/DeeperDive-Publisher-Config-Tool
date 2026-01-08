@@ -1,0 +1,56 @@
+.array-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 12px;
+  border-left: 2px solid var(--array-border);
+  box-sizing: border-box;
+}
+
+.array-item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 8px;
+  background: var(--array-item-bg);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.array-item-content {
+  flex: 1;
+}
+
+/* Positioning specific to array items */
+.array-item .delete-button {
+  align-self: flex-end;
+}
+
+.add-button {
+  align-self: flex-start;
+  background-color: var(--add-button-bg);
+  border: 1px solid var(--add-button-border);
+  color: var(--add-button-text);
+  /* Ensure it looks like a base button */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.add-button:hover {
+  background-color: var(--add-button-hover-bg);
+  border-color: var(--add-button-hover-border);
+  box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1);
+  transform: translateY(-1px);
+}
+
+.add-button:active {
+  background-color: var(--add-button-active-bg);
+  transform: translateY(0);
+  box-shadow: none;
+}

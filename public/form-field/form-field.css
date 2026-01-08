@@ -1,0 +1,92 @@
+:root {
+  /* Structure Colors */
+  --nested-border: var(--color-slate-200);
+  --array-border: var(--color-slate-300);
+  --array-item-bg: var(--color-slate-50);
+
+  /* Button: Delete */
+  --delete-button-bg: var(--color-red-50);
+  --delete-button-border: var(--color-red-200);
+  --delete-button-text: var(--color-red-500);
+  --delete-button-hover-bg: var(--color-red-100);
+  --delete-button-hover-border: var(--color-red-300);
+  --delete-button-active-bg: var(--color-red-200);
+
+  /* Button: Add */
+  --add-button-bg: var(--color-green-50);
+  --add-button-border: var(--color-green-200);
+  --add-button-text: var(--color-green-600);
+  --add-button-hover-bg: var(--color-green-100);
+  --add-button-hover-border: var(--color-green-300);
+  --add-button-active-bg: var(--color-green-200);
+
+  /* Inputs */
+  --input-bg: var(--color-white);
+  --input-border: var(--color-slate-300);
+  --input-text: var(--color-slate-700);
+  --input-focus-border: var(--color-blue-600);
+  --input-focus-shadow: rgba(59, 130, 246, 0.15);
+  --label-text: var(--color-slate-600);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.form-field--checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-field__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-field__label {
+  color: var(--label-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: block;
+}
+
+/* Remove checkbox styles that are now in primitive-field.css if they were specific?
+   Actually .form-field-checkbox-label is used in FormField.ts createLabel, so keep it here.
+*/
+.form-field-checkbox-label {
+  color: var(--label-text);
+  cursor: pointer;
+}
+
+/* .nested-group moved to object-field.css */
+
+/* .array-container, .array-item moved to array-field.css */
+
+/* Shared button styles used by FormField and ArrayField */
+.delete-button {
+  align-self: center;
+  background-color: var(--delete-button-bg);
+  border: 1px solid var(--delete-button-border);
+  /* Override base-button font/padding if we want to keep it smaller, or remove to standardize */
+  /* Keeping explicit override for "delete" button size */
+  font-size: 0.75rem;
+  padding: 4px 10px;
+
+  color: var(--delete-button-text);
+}
+
+.delete-button:hover {
+  background-color: var(--delete-button-hover-bg);
+  border-color: var(--delete-button-hover-border);
+  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.1);
+}
+
+.delete-button:active {
+  background-color: var(--delete-button-active-bg);
+}
+
+/* .add-button moved to array-field.css. Wait, is it used elsewhere? Only ArrayField uses it. */

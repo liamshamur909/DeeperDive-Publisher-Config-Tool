@@ -1,0 +1,210 @@
+:root {
+  /* Layout Colors */
+  /* Layout Colors */
+  --json-bg: #f4f4f4;
+  --form-bg: var(--color-white);
+  --form-border: #cccccc;
+
+  /* Button: Back */
+  --back-button-bg: var(--color-white);
+  --back-button-border: var(--color-slate-200);
+  --back-button-text: var(--color-slate-500);
+  --back-button-hover-bg: var(--color-slate-50);
+  --back-button-hover-border: var(--color-slate-300);
+  --back-button-hover-text: var(--color-slate-700);
+  --back-button-active-bg: var(--color-slate-100);
+
+  /* Button: Save */
+  --save-button-bg: var(--color-emerald-50);
+  --save-button-text: var(--color-emerald-600);
+  --save-button-border: var(--color-emerald-200);
+  --save-button-hover-bg: var(--color-emerald-100);
+  --save-button-hover-border: var(--color-emerald-300);
+  --save-button-active-bg: var(--color-emerald-200);
+
+  /* Button: Download */
+  --download-button-bg: var(--color-blue-50);
+  --download-button-text: var(--color-blue-600);
+  --download-button-border: var(--color-blue-200);
+  --download-button-hover-bg: var(--color-blue-100);
+  --download-button-hover-border: var(--color-blue-300);
+  --download-button-active-bg: var(--color-blue-200);
+}
+
+.publisher-config-component {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.controls {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.status-msg {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-weight: bold;
+  min-height: 1.2em;
+}
+
+.base-button {
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.base-button:hover {
+  transform: translateY(-1px);
+}
+
+.base-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.back-button {
+  background-color: var(--back-button-bg);
+  border-color: var(--back-button-border);
+  color: var(--back-button-text);
+  margin-right: auto;
+}
+
+.back-button:hover {
+  background-color: var(--back-button-hover-bg);
+  border-color: var(--back-button-hover-border);
+  color: var(--back-button-hover-text);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.back-button:active {
+  background-color: var(--back-button-active-bg);
+}
+
+.save-button {
+  background-color: var(--save-button-bg);
+  color: var(--save-button-text);
+  border-color: var(--save-button-border);
+}
+
+.save-button:hover {
+  background-color: var(--save-button-hover-bg);
+  border-color: var(--save-button-hover-border);
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.1); /* Specific shadow color override */
+}
+
+.save-button:active {
+  background-color: var(--save-button-active-bg);
+}
+
+.download-button {
+  background-color: var(--download-button-bg);
+  color: var(--download-button-text);
+  border-color: var(--download-button-border);
+}
+
+.download-button:hover {
+  background-color: var(--download-button-hover-bg);
+  border-color: var(--download-button-hover-border);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); /* Specific shadow color override */
+}
+
+.download-button:active {
+  background-color: var(--download-button-active-bg);
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  width: 100%;
+  flex: 13;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.json-display {
+  height: 100%;
+  flex: 1;
+  background-color: var(--json-bg);
+  border-radius: 4px;
+  overflow: auto;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.form-container {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 25px;
+  background-color: var(--form-bg);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.required-fields,
+.optional-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+.required-fields__form-fields,
+.optional-fields__form-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.divider {
+  border: none;
+  height: 6px;
+  background: linear-gradient(to right, #bfdbfe, #3b82f6, #bfdbfe);
+  border-radius: 10px;
+  opacity: 0.9;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.required-fields__header,
+.optional-fields__header {
+  width: 100%;
+  color: #1e3a8a;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #e0f2fe;
+  padding-bottom: 8px;
+  margin: 0;
+  width: 100%;
+}
