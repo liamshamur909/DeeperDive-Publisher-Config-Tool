@@ -56,8 +56,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-weight: bold;
-  min-height: 1.2em;
+  margin-top: 1rem;
+  font-weight: 500;
+  min-height: 1.5em; /* Prevent layout shift */
+}
+
+.status-msg--success {
+  color: var(--success-color, #16a34a);
 }
 
 .back-button {

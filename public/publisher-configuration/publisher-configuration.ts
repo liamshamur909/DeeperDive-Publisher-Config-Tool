@@ -313,10 +313,13 @@ export class PublisherConfiguration implements Component {
     const statusMsg = this.componentElement.querySelector(
       "#status-msg"
     ) as HTMLElement;
+    // Reset status class
+    statusMsg.className = "status-msg";
+
     // Data is already updated in this.publisherConfig via event listeners
     console.log("Saving config:", this.publisherConfig);
     statusMsg.textContent = "Configuration saved successfully!";
-    statusMsg.style.color = "green";
+    statusMsg.classList.add("status-msg--success");
   }
 
   /**

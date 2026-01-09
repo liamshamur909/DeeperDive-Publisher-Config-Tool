@@ -138,7 +138,6 @@ export class ObjectField implements Component {
     const label = document.createElement("label");
     label.textContent = key;
     label.classList.add("form-field__label");
-    label.style.marginBottom = "0"; // Override default label margin
     header.appendChild(label);
 
     if (!this.isFixedStructure) {

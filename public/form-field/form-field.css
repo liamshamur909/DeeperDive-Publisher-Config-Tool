@@ -76,3 +76,13 @@
 .delete-button:active {
   background-color: var(--delete-button-active-bg);
 }
+
+/* Specific override for labels inside headers. Used in ObjectField and FormField removal scenarios. */
+.form-field__header .form-field__label {
+  margin-bottom: 0;
+}
+
+/* Align delete button to the right in boolean (checkbox) fields */
+.form-field--checkbox .delete-button {
+  margin-left: auto;
+}

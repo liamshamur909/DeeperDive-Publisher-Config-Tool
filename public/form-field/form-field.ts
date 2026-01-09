@@ -78,7 +78,6 @@ export class FormField implements Component {
       // Remove button for boolean field
       if (this.onRemove) {
         const removeButton = this.createRemoveButton();
-        removeButton.style.marginLeft = "auto";
         this.componentElement.appendChild(removeButton);
       }
     } else if (Array.isArray(value)) {
@@ -139,7 +138,6 @@ export class FormField implements Component {
 
     if (this.onRemove) {
       const header = createElementWithClasses("div", ["form-field__header"]);
-      label.style.marginBottom = "0";
       header.appendChild(label);
       header.appendChild(this.createRemoveButton());
       return header;
