@@ -1,5 +1,6 @@
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
+import { showToast } from "../index.js";
 
 /**
  * Component for adding a new field with a name and a type selector.
@@ -75,9 +76,7 @@ export class AddField implements Component {
   /**
    * Attaches additional event listeners.
    */
-  attachEvents() {
-    // Handled in creation methods
-  }
+  attachEvents() {}
 
   /**
    * Removes the component from the DOM.
@@ -140,7 +139,7 @@ export class AddField implements Component {
     const type = this.fixedType || this.typeSelect.value;
 
     if (!key) {
-      alert("Field name cannot be empty");
+      showToast("Field name cannot be empty", "error");
       return;
     }
 

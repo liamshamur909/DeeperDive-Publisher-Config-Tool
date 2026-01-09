@@ -1,4 +1,4 @@
-import { navigateToPublishers } from "../index.js";
+import { navigateToPublishers, showToast, api } from "../index.js";
 import { FormField } from "../form-field/form-field.js";
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
@@ -82,7 +82,6 @@ export class PublisherConfiguration implements Component {
   private async init(filename: string) {
     await this.loadData(filename);
 
-    // render after data loaded
     this.render();
     this.mount();
   }
@@ -97,7 +96,6 @@ export class PublisherConfiguration implements Component {
         <button id="save-button" class="save-button base-button">Save & Validate</button>
         <button id="download-button" class="download-button base-button">Download JSON</button>
       </div>
-      <div id="status-msg" class="status-msg"></div>
       <div class="content-wrapper">
         <div id="form-container" class="form-container"></div>
         <pre id="json-display" class="json-display"></pre>
@@ -115,7 +113,6 @@ export class PublisherConfiguration implements Component {
    * Appends the component's element to the root element.
    */
   mount() {
-    // Add the component to the father element
     this.rootElement.appendChild(this.componentElement);
   }
 
@@ -144,7 +141,6 @@ export class PublisherConfiguration implements Component {
    * Removes the component from the DOM.
    */
   destroy() {
-    // Remove content and let browser garbage collect event listeners attached to removed elements
     this.componentElement.remove();
   }
 
@@ -154,12 +150,13 @@ export class PublisherConfiguration implements Component {
    */
   private async loadData(filename: string) {
     try {
-      const res = await fetch(`/api/publisher/${filename}`);
+      const res = await api.get(`/api/publisher/${filename}`);
       if (!res.ok) throw new Error(`Failed to fetch publishers: ${res.status}`);
       const json = await res.json();
       this.publisherConfig = json;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
+      showToast("Failed to fetch publishers", "error");
     }
   }
 
@@ -287,11 +284,11 @@ export class PublisherConfiguration implements Component {
       container,
       (key: string, initialValue: any) => {
         if (key in fields) {
-          alert("Field already exists");
+          showToast("Field already exists", "error");
           return false;
         }
         if (requiredFields.includes(key)) {
-          alert("Cannot add a required field manually");
+          showToast("Cannot add a required field manually", "error");
           return false;
         }
 
@@ -313,17 +310,20 @@ export class PublisherConfiguration implements Component {
   /**
    * Simulates saving the changes (currently just logs to console and shows a status message).
    */
-  private saveChanges() {
-    const statusMsg = this.componentElement.querySelector(
-      "#status-msg"
-    ) as HTMLElement;
-    // Reset status class
-    statusMsg.className = "status-msg";
+  private async saveChanges() {
+    try {
+      const res = await api.put(
+        `/api/publisher/${this.currentFilename}`,
+        this.publisherConfig
+      );
 
-    // Data is already updated in this.publisherConfig via event listeners
-    console.log("Saving config:", this.publisherConfig);
-    statusMsg.textContent = "Configuration saved successfully!";
-    statusMsg.classList.add("status-msg--success");
+      if (!res.ok) throw new Error("Failed to save");
+
+      showToast("Configuration saved successfully!", "success");
+    } catch (error) {
+      console.error("Save failed", error);
+      showToast("Failed to save configuration.", "error");
+    }
   }
 
   /**

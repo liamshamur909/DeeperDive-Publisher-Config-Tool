@@ -64,20 +64,16 @@ export class FormField implements Component {
   render() {
     const value = this.parentData[this.key];
 
-    // Determine type and render appropriate component
     if (typeof value === "boolean") {
       this.componentElement.classList.add("form-field--checkbox");
 
-      // PrimitiveField for boolean is just the checkbox input
       new PrimitiveField(this.componentElement, value, (newVal) => {
         this.parentData[this.key] = newVal;
         this.onChange();
       });
 
-      // Label handling
       this.componentElement.appendChild(this.createLabel(true));
 
-      // Remove button for boolean field
       if (this.onRemove) {
         const removeButton = this.createRemoveButton();
         this.componentElement.appendChild(removeButton);
@@ -94,7 +90,6 @@ export class FormField implements Component {
         this.isFixedStructure
       );
     } else {
-      // Number or String
       this.componentElement.appendChild(this.createLabel());
       new PrimitiveField(this.componentElement, value, (newVal) => {
         this.parentData[this.key] = newVal;
