@@ -147,6 +147,7 @@ export class Publishers implements Component {
     `;
 
     const button = createElementWithClasses("button", [
+      "base-button",
       "files-button",
     ]) as HTMLButtonElement;
 
