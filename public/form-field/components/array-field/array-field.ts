@@ -27,6 +27,7 @@ export class ArrayField implements Component {
     private onChange: () => void
   ) {
     this.rootElement = rootElement;
+    if (!this.rootElement) throw new Error("rootElement is required");
     this.componentElement = createElementWithClasses("div", [
       "array-container",
     ]);

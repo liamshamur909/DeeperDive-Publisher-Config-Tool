@@ -29,10 +29,13 @@ export class Publishers implements Component {
    * Creates an instance of the Publishers component.
    * @param rootId - The ID of the HTML element to mount this component into.
    */
-  constructor(rootId: string) {
-    const el = document.getElementById(rootId);
-    if (!el) throw new Error(`Element with id "${rootId}" not found`);
-    this.rootElement = el;
+  /**
+   * Creates an instance of the Publishers component.
+   * @param rootElement - The HTML element to mount this component into.
+   */
+  constructor(rootElement: HTMLElement) {
+    this.rootElement = rootElement;
+    if (!this.rootElement) throw new Error("rootElement is required");
     this.componentElement = createElementWithClasses("div", [
       "publishers-component",
     ]);

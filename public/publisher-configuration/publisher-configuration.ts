@@ -58,10 +58,14 @@ export class PublisherConfiguration implements Component {
    * @param rootId - The ID of the HTML element to mount this component into.
    * @param filename - The name of the configuration file to load.
    */
-  constructor(rootId: string, filename: string) {
-    const el = document.getElementById(rootId);
-    if (!el) throw new Error(`Element with id "${rootId}" not found`);
-    this.rootElement = el;
+  /**
+   * Creates an instance of the PublisherConfiguration component.
+   * @param rootElement - The HTML element to mount this component into.
+   * @param filename - The name of the configuration file to load.
+   */
+  constructor(rootElement: HTMLElement, filename: string) {
+    this.rootElement = rootElement;
+    if (!this.rootElement) throw new Error("rootElement is required");
     this.componentElement = createElementWithClasses("div", [
       "publisher-config-component",
     ]);

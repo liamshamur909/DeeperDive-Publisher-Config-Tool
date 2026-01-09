@@ -11,8 +11,10 @@ const appElement = document.getElementById("app");
 export function navigateToPublishers() {
   if (appElement) {
     appElement.innerHTML = "";
+    new Publishers(appElement);
+  } else {
+    console.error("App element not found");
   }
-  new Publishers("app");
 }
 
 /**
@@ -24,8 +26,10 @@ export function navigateToPublishers() {
 export function navigateToPublisherConfigurations(filename: string) {
   if (appElement) {
     appElement.innerHTML = "";
+    new PublisherConfiguration(appElement, filename);
+  } else {
+    console.error("App element not found");
   }
-  new PublisherConfiguration("app", filename);
 }
 
 // Initialize the application by loading the Publishers view when the DOM is ready.

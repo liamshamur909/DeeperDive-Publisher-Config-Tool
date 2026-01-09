@@ -43,6 +43,8 @@ export class FormField implements Component {
     this.onRemove = onRemove;
     this.isFixedStructure = isFixedStructure;
 
+    if (!this.rootElement) throw new Error("rootElement is required");
+
     this.componentElement = createElementWithClasses("div", ["form-field"]);
 
     this.init();

@@ -26,6 +26,7 @@ export class PrimitiveField implements Component {
     private onChange: (newValue: PrimitiveType) => void
   ) {
     this.rootElement = rootElement;
+    if (!this.rootElement) throw new Error("rootElement is required");
     this.componentElement = document.createElement("input");
     this.init();
   }

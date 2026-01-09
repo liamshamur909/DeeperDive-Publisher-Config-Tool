@@ -29,6 +29,7 @@ export class ObjectField implements Component {
     private isFixedStructure: boolean
   ) {
     this.rootElement = rootElement;
+    if (!this.rootElement) throw new Error("rootElement is required");
     this.componentElement = createElementWithClasses("div", ["nested-group"]);
     this.init();
   }

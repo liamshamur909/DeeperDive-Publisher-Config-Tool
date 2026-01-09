@@ -36,6 +36,7 @@ export class AddField implements Component {
     this.onAdd = onAdd;
     this.placeholder = placeholder;
     this.fixedType = fixedType;
+    if (!this.rootElement) throw new Error("rootElement is required");
     this.componentElement = createElementWithClasses("div", ["add-field"]);
     this.init();
   }
