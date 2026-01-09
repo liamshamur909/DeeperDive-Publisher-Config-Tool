@@ -1,0 +1,133 @@
+:root {
+  /* Component color variables */
+  --card-bg: var(--color-white); /* cards / row background */
+  --card-border: #e6eef8; /* subtle card border */
+  --table-header-bg: var(--color-slate-50); /* header background */
+  --table-body-bg: var(--color-slate-50); /* body background */
+  --table-row-border: #eef2f7; /* row dividers */
+  --row-alt-bg: #fbfdff; /* alternate row background */
+  --shadow: var(--shadow-default);
+  --header-text-color: var(--color-slate-500);
+  --cell-text-color: var(--color-slate-700);
+  --button-text-color: var(--color-slate-600);
+  --button-hover-border: var(--color-slate-300);
+  --button-hover-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  /* Component px variables */
+  --row-height: 40px;
+}
+
+.publishers-component {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.publishers-table {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.publishers-table__header {
+  height: var(--row-height);
+  min-height: var(--row-height);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  background: var(--table-header-bg);
+  font-weight: 700;
+  border-bottom: 1px solid var(--table-row-border);
+
+  /* Ensures the scrollbar doesn't affect layout */
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+/* Ensure header cells align with body columns and center content */
+.publishers-table__header .publishers-table__cell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  color: var(--header-text-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.publishers-table__body {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--table-body-bg);
+
+  /* Ensures the scrollbar doesn't affect layout */
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.publishers-table__row {
+  height: var(--row-height);
+  min-height: var(--row-height);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  border-bottom: 1px solid var(--table-row-border);
+}
+
+.publishers-table__cell {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--cell-text-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.publishers-table__cell.header {
+  font-weight: 700;
+}
+
+.files-button {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  color: var(--button-text-color);
+}
+
+.files-button:hover {
+  background-color: var(--row-alt-bg);
+  border-color: var(--button-hover-border);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.files-button:active {
+  background-color: var(--table-row-border);
+}
+
+.publishers-table__row:nth-child(even) {
+  background: var(--row-alt-bg);
+}

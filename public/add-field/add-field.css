@@ -1,0 +1,26 @@
+.add-field {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.add-field__input {
+  flex: 1;
+}
+
+.add-field__button {
+  background-color: var(--download-button-bg);
+  color: var(--download-button-text);
+  border: 1px solid var(--download-button-border);
+}
+
+.add-field__button:hover {
+  background-color: var(--download-button-hover-bg);
+  border-color: var(--download-button-hover-border);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); /* Specific shadow color override */
+}
+
+.add-field__button:active {
+  background-color: var(--download-button-active-bg);
+}
