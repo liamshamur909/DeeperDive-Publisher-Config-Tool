@@ -114,27 +114,18 @@
 .files-button {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 6px;
   box-shadow: var(--shadow);
   color: var(--button-text-color);
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 6px 12px;
-  transition: all 0.2s ease;
 }
 
 .files-button:hover {
   background-color: var(--row-alt-bg);
   border-color: var(--button-hover-border);
-  transform: translateY(-1px);
   box-shadow: var(--button-hover-shadow);
 }
 
 .files-button:active {
   background-color: var(--table-row-border);
-  transform: translateY(0);
-  box-shadow: none;
 }
 
 .publishers-table__row:nth-child(even) {

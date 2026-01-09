@@ -60,25 +60,6 @@
   min-height: 1.2em;
 }
 
-.base-button {
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 6px 12px;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-}
-
-.base-button:hover {
-  transform: translateY(-1px);
-}
-
-.base-button:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
 .back-button {
   background-color: var(--back-button-bg);
   border-color: var(--back-button-border);
