@@ -49,22 +49,6 @@
   align-items: center;
 }
 
-.status-msg {
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 1rem;
-  font-weight: 500;
-  min-height: 1.5em; /* Prevent layout shift */
-}
-
-.status-msg--success {
-  color: var(--success-color, #16a34a);
-}
-
 .back-button {
   background-color: var(--back-button-bg);
   border-color: var(--back-button-border);

@@ -1,7 +1,8 @@
 import { Publishers } from "./publishers/publishers.js";
 import { PublisherConfiguration } from "./publisher-configuration/publisher-configuration.js";
+import { Snackbar } from "./snackbar/snackbar.js";
+export { api } from "./api-client.js";
 
-// The main application container element.
 const appElement = document.getElementById("app");
 
 /**
@@ -32,7 +33,15 @@ export function navigateToPublisherConfigurations(filename: string) {
   }
 }
 
-// Initialize the application by loading the Publishers view when the DOM is ready.
 document.addEventListener("DOMContentLoaded", () => {
   navigateToPublishers();
 });
+
+const appSnackbar = new Snackbar(document.body);
+
+export function showToast(
+  message: string,
+  type: "success" | "error" | "info" = "info"
+) {
+  appSnackbar.show(message, type);
+}

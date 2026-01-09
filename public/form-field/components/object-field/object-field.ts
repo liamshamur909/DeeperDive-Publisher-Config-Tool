@@ -1,5 +1,6 @@
 import { Component } from "../../../interfaces.js";
 import { createElementWithClasses } from "../../../utils.js";
+import { showToast } from "../../../index.js";
 import { AddField } from "../../../add-field/add-field.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 
@@ -96,7 +97,7 @@ export class ObjectField implements Component {
       this.componentElement,
       (key: string, initialValue: any) => {
         if (key in this.data) {
-          alert("Property already exists");
+          showToast("Property already exists", "error");
           return false;
         }
 

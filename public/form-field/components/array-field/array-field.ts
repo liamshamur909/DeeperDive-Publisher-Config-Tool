@@ -32,7 +32,6 @@ export class ArrayField implements Component {
       "array-container",
     ]);
 
-    // Capture template from the first item if it exists
     if (this.arrayData.length > 0) {
       this.itemTemplate = this.createTemplate(this.arrayData[0]);
     }
@@ -127,8 +126,6 @@ export class ArrayField implements Component {
    * Renders a nested object item.
    */
   private renderNestedItem(container: HTMLElement, index: number) {
-    // Objects internal to an array are now always considered "Fixed Structure"
-    // meaning you can't add/remove properties from them, only edit values.
     new ObjectField(
       container,
       this.arrayData[index],
@@ -178,20 +175,15 @@ export class ArrayField implements Component {
     let newItem: any = "";
 
     if (this.itemTemplate !== null) {
-      // Use the persisted template
-      // We must CLONE it again so we don't share references
       if (typeof this.itemTemplate === "object") {
         newItem = JSON.parse(JSON.stringify(this.itemTemplate));
       } else {
         newItem = this.itemTemplate;
       }
     } else if (this.arrayData.length > 0) {
-      // Fallback: If no template (maybe passed empty, then added items), infer from last item
       newItem = this.createTemplate(this.arrayData[this.arrayData.length - 1]);
-      // Update template for future use
       this.itemTemplate = newItem;
     }
-    // Else (empty array, no template) -> newItem is ""
 
     this.arrayData.push(newItem);
     this.onChange();
@@ -205,12 +197,7 @@ export class ArrayField implements Component {
     if (typeof item === "object" && item !== null) {
       const template: any = {};
       Object.keys(item).forEach((key) => {
-        // Deep clone / defined structure with empty values
         if (typeof item[key] === "object" && item[key] !== null) {
-          // For nested objects (though strictly we said only 1 level deep strings,
-          // but good to be safe), recurse or just set empty.
-          // Given simplified rules: "new object type can only contain string values"
-          // We can assume properties are strings.
           template[key] = "";
         } else {
           template[key] = "";
@@ -218,7 +205,6 @@ export class ArrayField implements Component {
       });
       return template;
     }
-    // If primitive, the template is just the empty value of that type
     return "";
   }
 }

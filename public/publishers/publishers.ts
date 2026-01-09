@@ -1,4 +1,4 @@
-import { navigateToPublisherConfigurations } from "../index.js";
+import { navigateToPublisherConfigurations, showToast, api } from "../index.js";
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
 
@@ -25,10 +25,6 @@ export class Publishers implements Component {
   /** Static headers for the publishers table. */
   readonly tableHeaders = ["ID", "Alias", "Action"];
 
-  /**
-   * Creates an instance of the Publishers component.
-   * @param rootId - The ID of the HTML element to mount this component into.
-   */
   /**
    * Creates an instance of the Publishers component.
    * @param rootElement - The HTML element to mount this component into.
@@ -99,15 +95,12 @@ export class Publishers implements Component {
    * Fetches data and populates the table body with rows.
    */
   private async loadTableRows() {
-    // Remove all current rows of the table
     this.componentElement
       .querySelectorAll<HTMLElement>(".publishers-table__row")
       .forEach((row) => row.remove());
 
-    // Fetch publishers
     const publishers = await this.getPublishers();
 
-    // Create the rows based on the publishers array
     const tableBody = document.getElementById("publishers-table-body");
     if (tableBody) {
       publishers.forEach((publisher) => {
@@ -123,7 +116,7 @@ export class Publishers implements Component {
    */
   private async getPublishers() {
     try {
-      const res = await fetch("/api/publishers");
+      const res = await api.get("/api/publishers");
       if (!res.ok) throw new Error(`Failed to fetch publishers: ${res.status}`);
       const json = await res.json();
       const publishersArray: Publisher[] = Array.isArray(json.publishers)
@@ -132,6 +125,7 @@ export class Publishers implements Component {
       return publishersArray;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
+      showToast("Failed to fetch publishers", "error");
       return [];
     }
   }

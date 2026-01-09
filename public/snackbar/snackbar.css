@@ -1,0 +1,82 @@
+/* Snackbar Container - fixed at the bottom center */
+#snackbar-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  align-items: center;
+  pointer-events: none; /* Allow clicks to pass through container */
+}
+
+/* Individual Toast Notification */
+.snackbar-toast {
+  min-width: 300px;
+  max-width: 450px;
+  padding: 10px 16px; /* Matches button padding roughly */
+  border-radius: 6px; /* Matches button border-radius */
+  font-size: 0.9rem; /* Matches button font size roughly */
+  font-weight: 600; /* Matches button font weight */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.3s ease forwards;
+  pointer-events: auto;
+  border: 1px solid transparent; /* Prepare for border */
+}
+
+.snackbar-toast.hide {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* Variants - Matching Button Styles */
+
+/* Success - Matches Save Button */
+.snackbar-toast__success {
+  background-color: var(--color-emerald-50);
+  color: var(--color-emerald-600);
+  border-color: var(--color-emerald-200);
+}
+
+/* Error - Matches (Hypothetical) Delete/Error Button */
+.snackbar-toast__error {
+  background-color: var(--color-red-50);
+  color: var(--color-red-500);
+  border-color: var(--color-red-200);
+}
+
+/* Info - Matches Download Button */
+.snackbar-toast__info {
+  background-color: var(--color-blue-50);
+  color: var(--color-blue-600);
+  border-color: var(--color-blue-200);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
