@@ -54,18 +54,6 @@
   display: block;
 }
 
-/* Remove checkbox styles that are now in primitive-field.css if they were specific?
-   Actually .form-field-checkbox-label is used in FormField.ts createLabel, so keep it here.
-*/
-.form-field-checkbox-label {
-  color: var(--label-text);
-  cursor: pointer;
-}
-
-/* .nested-group moved to object-field.css */
-
-/* .array-container, .array-item moved to array-field.css */
-
 /* Shared button styles used by FormField and ArrayField */
 .delete-button {
   align-self: center;
@@ -88,5 +76,3 @@
 .delete-button:active {
   background-color: var(--delete-button-active-bg);
 }
-
-/* .add-button moved to array-field.css. Wait, is it used elsewhere? Only ArrayField uses it. */

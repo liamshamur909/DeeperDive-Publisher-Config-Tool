@@ -48,10 +48,7 @@ export class PrimitiveField implements Component {
     if (typeof this.value === "boolean") {
       input.type = "checkbox";
       input.checked = this.value;
-      input.className = ""; // Reset classes for checkbox
-      // Remove any previously attached listeners? (Ideally we'd handle cleanup, but for now just adding new ones is the pattern, though risky if re-rendered.
-      // Since init calls render once, it's fine. If re-rendered, we might duplicate listeners.
-      // But let's stick to the user's request: element exists, configure it.)
+      input.className = "";
       input.addEventListener("change", (e) => {
         this.onChange((e.target as HTMLInputElement).checked);
       });

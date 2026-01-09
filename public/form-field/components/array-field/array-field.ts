@@ -1,7 +1,7 @@
 import { Component } from "../../../interfaces.js";
 import { createElementWithClasses } from "../../../utils.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
-import { FormFieldFactory } from "../object-field/object-field.js";
+import { ObjectField } from "../object-field/object-field.js";
 
 /**
  * Component for rendering arrays.
@@ -12,26 +12,30 @@ export class ArrayField implements Component {
   rootElement: HTMLElement;
   /** The main DOM element of this component. */
   componentElement: HTMLElement;
+  /** Template for new items, ensuring structure persistence. */
+  private itemTemplate: any = null;
 
   /**
    * Creates an instance of ArrayField.
    * @param rootElement - The container element.
    * @param arrayData - The array to edit.
    * @param onChange - Callback when the array changes.
-   * @param fieldFactory - Factory function for recursive fields (for object items).
-   * @param isFixedStructure - If true, structure of object items is fixed (but items can be added/removed).
    */
   constructor(
     rootElement: HTMLElement,
     private arrayData: any[],
-    private onChange: () => void,
-    private fieldFactory: FormFieldFactory,
-    private isFixedStructure: boolean
+    private onChange: () => void
   ) {
     this.rootElement = rootElement;
     this.componentElement = createElementWithClasses("div", [
       "array-container",
     ]);
+
+    // Capture template from the first item if it exists
+    if (this.arrayData.length > 0) {
+      this.itemTemplate = this.createTemplate(this.arrayData[0]);
+    }
+
     this.init();
   }
 
@@ -51,29 +55,35 @@ export class ArrayField implements Component {
   }
 
   /**
+   * Appends the component's element to the root element.
+   */
+  mount() {
+    this.rootElement.appendChild(this.componentElement);
+  }
+
+  /**
+   * Attaches additional event listeners.
+   */
+  attachEvents() {}
+
+  /**
+   * Removes the component from the DOM.
+   */
+  destroy() {
+    this.componentElement.remove();
+  }
+
+  /**
    * Renders the list of array items and the "Add Item" button.
    */
   private renderArrayItems() {
     this.componentElement.innerHTML = "";
 
-    // Determine template from the first item if possible (for consistent object structures)
-    const itemTemplate = this.getItemTemplate();
-
     this.arrayData.forEach((item, index) => {
       this.renderArrayItem(item, index);
     });
 
-    this.renderAddButton(itemTemplate);
-  }
-
-  /**
-   * Gets a template for new items based on existing data.
-   */
-  private getItemTemplate(): any {
-    if (this.arrayData.length > 0) {
-      return JSON.parse(JSON.stringify(this.arrayData[0]));
-    }
-    return null;
+    this.renderAddButton();
   }
 
   /**
@@ -98,19 +108,34 @@ export class ArrayField implements Component {
   }
 
   /**
-   * Renders a nested object item using the field factory.
+   * Renders the "Add Item" button logic.
+   */
+  private renderAddButton() {
+    const addButton = createElementWithClasses("button", [
+      "add-button",
+      "base-button",
+    ]);
+    addButton.textContent = "+ Add Item";
+    addButton.addEventListener("click", () => {
+      this.handleAddItem();
+    });
+    this.componentElement.appendChild(addButton);
+  }
+
+  /**
+   * Renders a nested object item.
    */
   private renderNestedItem(container: HTMLElement, index: number) {
-    const nestedContainer = createElementWithClasses("div", ["nested-group"]);
-    this.fieldFactory(
-      nestedContainer,
-      this.arrayData,
-      index,
-      this.onChange,
-      undefined, // Array items removals handled by button below
-      this.isFixedStructure
+    // Objects internal to an array are now always considered "Fixed Structure"
+    // meaning you can't add/remove properties from them, only edit values.
+    new ObjectField(
+      container,
+      this.arrayData[index],
+      () => {
+        this.onChange();
+      },
+      true // isFixedStructure = true
     );
-    container.appendChild(nestedContainer);
   }
 
   /**
@@ -146,37 +171,26 @@ export class ArrayField implements Component {
   }
 
   /**
-   * Renders the "Add Item" button logic.
-   * @param itemTemplate - The template to use for new items.
-   */
-  private renderAddButton(itemTemplate: any) {
-    const addButton = createElementWithClasses("button", [
-      "add-button",
-      "base-button",
-    ]);
-    addButton.textContent = "+ Add Item";
-    addButton.addEventListener("click", () => {
-      this.handleAddItem(itemTemplate);
-    });
-    this.componentElement.appendChild(addButton);
-  }
-
-  /**
    * Handles adding a new item to the array.
    */
-  private handleAddItem(itemTemplate: any) {
+  private handleAddItem() {
     let newItem: any = "";
-    let template = null;
 
-    if (this.arrayData.length > 0) {
-      template = this.arrayData[this.arrayData.length - 1]; // Use last item as template if available
-    } else if (itemTemplate !== null) {
-      template = itemTemplate;
+    if (this.itemTemplate !== null) {
+      // Use the persisted template
+      // We must CLONE it again so we don't share references
+      if (typeof this.itemTemplate === "object") {
+        newItem = JSON.parse(JSON.stringify(this.itemTemplate));
+      } else {
+        newItem = this.itemTemplate;
+      }
+    } else if (this.arrayData.length > 0) {
+      // Fallback: If no template (maybe passed empty, then added items), infer from last item
+      newItem = this.createTemplate(this.arrayData[this.arrayData.length - 1]);
+      // Update template for future use
+      this.itemTemplate = newItem;
     }
-
-    if (template !== null) {
-      newItem = this.generateNewItemFromTemplate(template);
-    }
+    // Else (empty array, no template) -> newItem is ""
 
     this.arrayData.push(newItem);
     this.onChange();
@@ -184,35 +198,26 @@ export class ArrayField implements Component {
   }
 
   /**
-   * Generates a new item value based on the template type.
+   * Creates a template from an item, clearing string values.
    */
-  private generateNewItemFromTemplate(template: any): any {
-    if (typeof template === "object" && template !== null) {
-      return JSON.parse(JSON.stringify(template));
-    } else if (typeof template === "number") {
-      return 0;
-    } else if (typeof template === "boolean") {
-      return false;
+  private createTemplate(item: any): any {
+    if (typeof item === "object" && item !== null) {
+      const template: any = {};
+      Object.keys(item).forEach((key) => {
+        // Deep clone / defined structure with empty values
+        if (typeof item[key] === "object" && item[key] !== null) {
+          // For nested objects (though strictly we said only 1 level deep strings,
+          // but good to be safe), recurse or just set empty.
+          // Given simplified rules: "new object type can only contain string values"
+          // We can assume properties are strings.
+          template[key] = "";
+        } else {
+          template[key] = "";
+        }
+      });
+      return template;
     }
+    // If primitive, the template is just the empty value of that type
     return "";
-  }
-
-  /**
-   * Appends the component's element to the root element.
-   */
-  mount() {
-    this.rootElement.appendChild(this.componentElement);
-  }
-
-  /**
-   * Attaches additional event listeners.
-   */
-  attachEvents() {}
-
-  /**
-   * Removes the component from the DOM.
-   */
-  destroy() {
-    this.componentElement.remove();
   }
 }

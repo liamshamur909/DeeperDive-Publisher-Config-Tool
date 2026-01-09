@@ -57,26 +57,6 @@ export class FormField implements Component {
   }
 
   /**
-   * Factory callback passed to children components to create recursive FormFields.
-   * @param container - The container for the new field.
-   * @param data - The data object.
-   * @param key - The key of the field.
-   * @param onChange - Change callback.
-   * @param onRemove - Remove callback.
-   * @param isFixedStructure - Fixed structure flag.
-   */
-  private createFormField(
-    container: HTMLElement,
-    data: any,
-    key: string | number,
-    onChange: () => void,
-    onRemove?: () => void,
-    isFixedStructure: boolean = false
-  ) {
-    new FormField(container, data, key, onChange, onRemove, isFixedStructure);
-  }
-
-  /**
    * Renders the field based on the type of value (boolean, array, object, or primitive).
    */
   render() {
@@ -103,20 +83,13 @@ export class FormField implements Component {
       }
     } else if (Array.isArray(value)) {
       this.componentElement.appendChild(this.createLabel());
-      new ArrayField(
-        this.componentElement,
-        value,
-        this.onChange,
-        this.createFormField.bind(this),
-        this.isFixedStructure
-      );
+      new ArrayField(this.componentElement, value, this.onChange);
     } else if (typeof value === "object" && value !== null) {
       this.componentElement.appendChild(this.createLabel());
       new ObjectField(
         this.componentElement,
         value,
         this.onChange,
-        this.createFormField.bind(this),
         this.isFixedStructure
       );
     } else {
@@ -127,6 +100,25 @@ export class FormField implements Component {
         this.onChange();
       });
     }
+  }
+
+  /**
+   * Appends the component's element to the root element.
+   */
+  mount() {
+    this.rootElement.appendChild(this.componentElement);
+  }
+
+  /**
+   * Attaches additional event listeners.
+   */
+  attachEvents() {}
+
+  /**
+   * Removes the component from the DOM.
+   */
+  destroy() {
+    this.componentElement.remove();
   }
 
   /**
@@ -171,24 +163,5 @@ export class FormField implements Component {
       if (this.onRemove) this.onRemove();
     });
     return button as HTMLButtonElement;
-  }
-
-  /**
-   * Appends the component's element to the root element.
-   */
-  mount() {
-    this.rootElement.appendChild(this.componentElement);
-  }
-
-  /**
-   * Attaches additional event listeners.
-   */
-  attachEvents() {}
-
-  /**
-   * Removes the component from the DOM.
-   */
-  destroy() {
-    this.componentElement.remove();
   }
 }

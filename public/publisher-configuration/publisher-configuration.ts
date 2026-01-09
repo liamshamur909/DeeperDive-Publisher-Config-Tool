@@ -160,6 +160,42 @@ export class PublisherConfiguration implements Component {
   }
 
   /**
+   * Orchestrates the generation of the entire form, splitting it into required and optional sections.
+   * @param fields - The configuration object to generate the form for.
+   */
+  private generateForm(fields: PublisherConfig) {
+    const formContainer = this.componentElement.querySelector(
+      "#form-container"
+    ) as HTMLElement;
+
+    const requiredFieldsElement = this.getRequiredFieldsElement(fields);
+    formContainer.appendChild(requiredFieldsElement);
+
+    const optionalFields = Object.keys(fields).filter(
+      (key) => !requiredFields.includes(key)
+    );
+
+    const divider = createElementWithClasses("div", ["divider"]);
+    formContainer.appendChild(divider);
+
+    const optionalFieldsElement = this.getOptionalFieldsElement(
+      fields,
+      optionalFields
+    );
+    formContainer.appendChild(optionalFieldsElement);
+  }
+
+  /**
+   * Updates the JSON preview area with the current state of the configuration object.
+   */
+  private updateJsonDisplay() {
+    const pre = this.componentElement.querySelector("#json-display");
+    if (pre) {
+      pre.textContent = JSON.stringify(this.publisherConfig, null, 2);
+    }
+  }
+
+  /**
    * Generates the HTML container for required fields.
    * @param fields - The configuration object containing the data.
    * @returns The constructed HTML element for required fields.
@@ -261,42 +297,6 @@ export class PublisherConfiguration implements Component {
       },
       "Enter new field name"
     );
-  }
-
-  /**
-   * Orchestrates the generation of the entire form, splitting it into required and optional sections.
-   * @param fields - The configuration object to generate the form for.
-   */
-  private generateForm(fields: PublisherConfig) {
-    const formContainer = this.componentElement.querySelector(
-      "#form-container"
-    ) as HTMLElement;
-
-    const requiredFieldsElement = this.getRequiredFieldsElement(fields);
-    formContainer.appendChild(requiredFieldsElement);
-
-    const optionalFields = Object.keys(fields).filter(
-      (key) => !requiredFields.includes(key)
-    );
-
-    const divider = createElementWithClasses("div", ["divider"]);
-    formContainer.appendChild(divider);
-
-    const optionalFieldsElement = this.getOptionalFieldsElement(
-      fields,
-      optionalFields
-    );
-    formContainer.appendChild(optionalFieldsElement);
-  }
-
-  /**
-   * Updates the JSON preview area with the current state of the configuration object.
-   */
-  private updateJsonDisplay() {
-    const pre = this.componentElement.querySelector("#json-display");
-    if (pre) {
-      pre.textContent = JSON.stringify(this.publisherConfig, null, 2);
-    }
   }
 
   /**

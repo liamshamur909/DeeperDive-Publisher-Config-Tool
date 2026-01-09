@@ -1,16 +1,7 @@
 import { Component } from "../../../interfaces.js";
 import { createElementWithClasses } from "../../../utils.js";
 import { AddField } from "../../../add-field/add-field.js";
-
-// Factory for creating child FormFields to avoid circular dependency
-export type FormFieldFactory = (
-  container: HTMLElement,
-  data: any,
-  key: string | number,
-  onChange: () => void,
-  onRemove?: () => void,
-  isFixedStructure?: boolean
-) => void;
+import { PrimitiveField } from "../primitive-field/primitive-field.js";
 
 /**
  * Component for rendering nested object structures.
@@ -21,20 +12,20 @@ export class ObjectField implements Component {
   rootElement: HTMLElement;
   /** The main DOM element of this component. */
   componentElement: HTMLElement;
+  /** Container for the list of fields. */
+  private fieldsContainer!: HTMLElement;
 
   /**
    * Creates an instance of ObjectField.
    * @param rootElement - The container element.
    * @param data - The object data to edit.
    * @param onChange - Callback when any property changes.
-   * @param fieldFactory - Factory function to create recursive form fields.
    * @param isFixedStructure - If true, properties cannot be added or removed.
    */
   constructor(
     rootElement: HTMLElement,
     private data: any,
     private onChange: () => void,
-    private fieldFactory: FormFieldFactory,
     private isFixedStructure: boolean
   ) {
     this.rootElement = rootElement;
@@ -55,51 +46,15 @@ export class ObjectField implements Component {
    * Also renders the "Add Property" component if structure is not fixed.
    */
   render() {
-    const fieldsContainer = createElementWithClasses("div", [
+    this.fieldsContainer = createElementWithClasses("div", [
       "fields-container",
     ]);
-    this.componentElement.appendChild(fieldsContainer);
+    this.componentElement.appendChild(this.fieldsContainer);
 
-    const renderFields = () => {
-      fieldsContainer.innerHTML = "";
-      Object.keys(this.data).forEach((k) => {
-        const onRemoveCallback = this.isFixedStructure
-          ? undefined
-          : () => {
-              delete this.data[k];
-              this.onChange();
-              renderFields();
-            };
-
-        this.fieldFactory(
-          fieldsContainer,
-          this.data,
-          k,
-          this.onChange,
-          onRemoveCallback,
-          this.isFixedStructure
-        );
-      });
-    };
-
-    renderFields();
+    this.renderFieldsList();
 
     if (!this.isFixedStructure) {
-      new AddField(
-        this.componentElement,
-        (key: string, initialValue: any) => {
-          if (key in this.data) {
-            alert("Property already exists");
-            return false;
-          }
-
-          this.data[key] = initialValue;
-          this.onChange();
-          renderFields();
-          return true;
-        },
-        "New property name"
-      );
+      this.renderAddField();
     }
   }
 
@@ -120,5 +75,96 @@ export class ObjectField implements Component {
    */
   destroy() {
     this.componentElement.remove();
+  }
+
+  /**
+   * Renders the list of all fields in the data object.
+   */
+  private renderFieldsList() {
+    this.fieldsContainer.innerHTML = "";
+    Object.keys(this.data).forEach((key) => {
+      this.renderFieldRow(key);
+    });
+  }
+
+  /**
+   * Renders the "Add Property" component.
+   */
+  private renderAddField() {
+    new AddField(
+      this.componentElement,
+      (key: string, initialValue: any) => {
+        if (key in this.data) {
+          alert("Property already exists");
+          return false;
+        }
+
+        this.data[key] = initialValue;
+        this.onChange();
+        this.renderFieldsList();
+        return true;
+      },
+      "New property name",
+      "string" // Enforce string type
+    );
+  }
+
+  /**
+   * Renders a single field row (label, remove button, and input).
+   * @param key - The property name.
+   */
+  private renderFieldRow(key: string) {
+    const fieldContainer = createElementWithClasses("div", ["form-field"]);
+
+    // Header with Label and Remove Button
+    const header = this.createHeader(key);
+    fieldContainer.appendChild(header);
+
+    // Value Field (Primitive Only)
+    new PrimitiveField(fieldContainer, this.data[key], (newVal) => {
+      this.data[key] = newVal;
+      this.onChange();
+    });
+
+    this.fieldsContainer.appendChild(fieldContainer);
+  }
+
+  /**
+   * Creates the header element for a field row.
+   * @param key - The property name.
+   */
+  private createHeader(key: string): HTMLElement {
+    const header = createElementWithClasses("div", ["form-field__header"]);
+    const label = document.createElement("label");
+    label.textContent = key;
+    label.classList.add("form-field__label");
+    label.style.marginBottom = "0"; // Override default label margin
+    header.appendChild(label);
+
+    if (!this.isFixedStructure) {
+      const removeButton = this.createRemoveButton(key);
+      header.appendChild(removeButton);
+    }
+
+    return header;
+  }
+
+  /**
+   * Creates a remove button for a field.
+   * @param key - The property name to remove.
+   */
+  private createRemoveButton(key: string): HTMLElement {
+    const removeButton = createElementWithClasses("button", [
+      "delete-button",
+      "base-button",
+    ]);
+    removeButton.textContent = "Remove Field";
+    removeButton.title = "Remove Field";
+    removeButton.addEventListener("click", () => {
+      delete this.data[key];
+      this.onChange();
+      this.renderFieldsList();
+    });
+    return removeButton;
   }
 }

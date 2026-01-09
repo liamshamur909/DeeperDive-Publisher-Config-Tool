@@ -93,25 +93,6 @@ export class Publishers implements Component {
   }
 
   /**
-   * Fetches the list of publishers from the API.
-   * @returns A promise that resolves to an array of Publisher objects.
-   */
-  private async getPublishers() {
-    try {
-      const res = await fetch("/api/publishers");
-      if (!res.ok) throw new Error(`Failed to fetch publishers: ${res.status}`);
-      const json = await res.json();
-      const publishersArray: Publisher[] = Array.isArray(json.publishers)
-        ? json.publishers
-        : [];
-      return publishersArray;
-    } catch (error) {
-      console.error("Failed to fetch publishers, using fallback data", error);
-      return [];
-    }
-  }
-
-  /**
    * Fetches data and populates the table body with rows.
    */
   private async loadTableRows() {
@@ -130,6 +111,25 @@ export class Publishers implements Component {
         const row = this.createRow(publisher);
         tableBody.appendChild(row);
       });
+    }
+  }
+
+  /**
+   * Fetches the list of publishers from the API.
+   * @returns A promise that resolves to an array of Publisher objects.
+   */
+  private async getPublishers() {
+    try {
+      const res = await fetch("/api/publishers");
+      if (!res.ok) throw new Error(`Failed to fetch publishers: ${res.status}`);
+      const json = await res.json();
+      const publishersArray: Publisher[] = Array.isArray(json.publishers)
+        ? json.publishers
+        : [];
+      return publishersArray;
+    } catch (error) {
+      console.error("Failed to fetch publishers, using fallback data", error);
+      return [];
     }
   }
 

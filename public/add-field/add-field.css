@@ -9,7 +9,6 @@
   flex: 1;
 }
 
-/* Copying styles from .save-button / .download-button for consistency */
 .add-field__button {
   background-color: var(--download-button-bg);
   color: var(--download-button-text);

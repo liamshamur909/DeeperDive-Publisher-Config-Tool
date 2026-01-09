@@ -32,7 +32,6 @@
   background-color: var(--add-button-bg);
   border: 1px solid var(--add-button-border);
   color: var(--add-button-text);
-  /* Ensure it looks like a base button */
 }
 
 .add-button:hover {

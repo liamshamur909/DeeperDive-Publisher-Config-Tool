@@ -21,14 +21,21 @@ export class AddField implements Component {
    */
   private placeholder: string;
 
+  /**
+   * Optional fixed type. If set, the type selector is hidden and this type is used.
+   */
+  private fixedType?: "string" | "number" | "boolean" | "array" | "object";
+
   constructor(
     rootElement: HTMLElement,
     onAdd: (key: string, value: any) => boolean,
-    placeholder: string = "Enter new field name"
+    placeholder: string = "Enter new field name",
+    fixedType?: "string" | "number" | "boolean" | "array" | "object"
   ) {
     this.rootElement = rootElement;
     this.onAdd = onAdd;
     this.placeholder = placeholder;
+    this.fixedType = fixedType;
     this.componentElement = createElementWithClasses("div", ["add-field"]);
     this.init();
   }
@@ -46,11 +53,14 @@ export class AddField implements Component {
    */
   render() {
     this.keyInput = this.createKeyInput();
-    this.typeSelect = this.createTypeSelect();
-    const addButton = this.createAddButton();
-
     this.componentElement.appendChild(this.keyInput);
-    this.componentElement.appendChild(this.typeSelect);
+
+    if (!this.fixedType) {
+      this.typeSelect = this.createTypeSelect();
+      this.componentElement.appendChild(this.typeSelect);
+    }
+
+    const addButton = this.createAddButton();
     this.componentElement.appendChild(addButton);
   }
 
@@ -126,9 +136,7 @@ export class AddField implements Component {
    */
   private handleAdd() {
     const key = this.keyInput.value.trim();
-    const type = this.typeSelect.value;
-    // ... rest of method content is inside, but tool only needs to match start/end chunks or I can replace the header.
-    // I need to replace the header block.
+    const type = this.fixedType || this.typeSelect.value;
 
     if (!key) {
       alert("Field name cannot be empty");
