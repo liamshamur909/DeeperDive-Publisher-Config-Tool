@@ -160,3 +160,37 @@
 .compare-modal__btn:active {
   background-color: var(--color-slate-100);
 }
+
+/* Controls (Version Selector) */
+.compare-modal__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.compare-modal__controls label {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.version-select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  background-color: #fff;
+  font-size: 0.9rem;
+  color: var(--text-primary, #333);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.version-select:hover {
+  border-color: var(--color-primary, #007bff);
+}
+
+.version-select:focus {
+  border-color: var(--color-primary, #007bff);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
