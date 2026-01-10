@@ -8,6 +8,7 @@ import { FormField } from "../form-field/form-field.js";
 import { Component } from "../../shared/interfaces.js";
 import { createElementWithClasses } from "../../shared/utils.js";
 import { AddField } from "../add-field/add-field.js";
+import { CompareConfiguration } from "../../modals/compare-configuration/compare-configuration.js";
 
 /**
  * Represents the configuration for a specific page within a publisher's setup.
@@ -97,6 +98,7 @@ export class PublisherConfiguration implements Component {
       <div class="controls">
         <button id="back-button" class="back-button base-button">Back</button>
         <button id="save-button" class="save-button base-button">Save & Validate</button>
+        <button id="compare-button" class="compare-button base-button">Compare w/ Original</button>
         <button id="download-button" class="download-button base-button">Download JSON</button>
       </div>
       <div class="content-wrapper">
@@ -137,6 +139,12 @@ export class PublisherConfiguration implements Component {
       this.componentElement.querySelector("#download-button");
     if (downloadButton) {
       downloadButton.addEventListener("click", () => this.downloadJson());
+    }
+
+    const compareButton =
+      this.componentElement.querySelector("#compare-button");
+    if (compareButton) {
+      compareButton.addEventListener("click", () => this.openCompareModal());
     }
   }
 
@@ -337,6 +345,25 @@ export class PublisherConfiguration implements Component {
       console.error("Save failed", error);
       showToast("Failed to save configuration.", SnackbarType.ERROR);
     }
+  }
+
+  /**
+   * Opens the comparison modal to show differences between the initial and current configuration.
+   */
+  private openCompareModal() {
+    if (
+      JSON.stringify(this.publisherConfig) ===
+      JSON.stringify(this.initialConfig)
+    ) {
+      showToast("No changes were made", SnackbarType.INFO);
+      return;
+    }
+
+    new CompareConfiguration(
+      document.body, // Mount to body to overlay everything
+      this.initialConfig,
+      this.publisherConfig
+    );
   }
 
   /**

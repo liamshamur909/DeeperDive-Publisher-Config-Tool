@@ -29,6 +29,13 @@
   --download-button-hover-bg: var(--color-blue-100);
   --download-button-hover-border: var(--color-blue-300);
   --download-button-active-bg: var(--color-blue-200);
+  /* Button: Compare */
+  --compare-button-bg: #f3e8ff; /* purple-50 */
+  --compare-button-text: #7e22ce; /* purple-700 */
+  --compare-button-border: #d8b4fe; /* purple-200 */
+  --compare-button-hover-bg: #e9d5ff; /* purple-100 */
+  --compare-button-hover-border: #c084fc; /* purple-300 */
+  --compare-button-active-bg: #d8b4fe; /* purple-200 */
 }
 
 .publisher-config-component {
@@ -81,6 +88,22 @@
 
 .save-button:active {
   background-color: var(--save-button-active-bg);
+}
+
+.compare-button {
+  background-color: var(--compare-button-bg);
+  color: var(--compare-button-text);
+  border-color: var(--compare-button-border);
+}
+
+.compare-button:hover {
+  background-color: var(--compare-button-hover-bg);
+  border-color: var(--compare-button-hover-border);
+  box-shadow: 0 4px 6px rgba(126, 34, 206, 0.1);
+}
+
+.compare-button:active {
+  background-color: var(--compare-button-active-bg);
 }
 
 .download-button {

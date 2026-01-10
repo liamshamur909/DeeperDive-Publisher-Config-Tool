@@ -27,3 +27,12 @@ export enum HttpMethod {
   PUT = "PUT",
   DELETE = "DELETE",
 }
+
+/**
+ * Types of differences in a configuration comparison.
+ */
+export enum DiffType {
+  ADDED = "added",
+  REMOVED = "removed",
+  UNCHANGED = "unchanged",
+}
