@@ -6,27 +6,43 @@ import { showToast, FieldType, SnackbarType } from "../../index.js";
  * Component for adding a new field with a name and a type selector.
  */
 export class AddField implements Component {
+  /**
+   * Parent element where the component is attached.
+   */
   rootElement: HTMLElement;
+  /**
+   * The main container element for the component.
+   */
   componentElement: HTMLElement;
 
   /**
    * Callback to be executed when the add button is clicked.
-   * Should return true if the field was successfully added (to clear inputs), false otherwise.
+   * @param key - The name of the new field.
+   * @param value - The initial value of the new field.
+   * @returns true if the field was successfully added (clears inputs), false otherwise.
    */
   onAdd: (key: string, value: any) => boolean;
 
   private keyInput!: HTMLInputElement;
   private typeSelect!: HTMLSelectElement;
+
   /**
    * Placeholder text for the input field.
    */
   private placeholder: string;
 
   /**
-   * Optional fixed type. If set, the type selector is hidden and this type is used.
+   * Optional fixed type. If set, the type selector is hidden and this type is implied.
    */
   private fixedType?: FieldType;
 
+  /**
+   * Creates an instance of the AddField component.
+   * @param rootElement - The DOM element to append this component to.
+   * @param onAdd - Callback function invoked when adding a field.
+   * @param placeholder - Custom placeholder text for the input.
+   * @param fixedType - Pre-defined field type (hides type selector).
+   */
   constructor(
     rootElement: HTMLElement,
     onAdd: (key: string, value: any) => boolean,
@@ -51,7 +67,7 @@ export class AddField implements Component {
   }
 
   /**
-   * Renders the input, type selector, and add button.
+   * Renders the input, type selector (if not fixed), and add button.
    */
   render() {
     this.keyInput = this.createKeyInput();
@@ -75,6 +91,7 @@ export class AddField implements Component {
 
   /**
    * Attaches additional event listeners.
+   * Currently empty as events are handled inline during creation.
    */
   attachEvents() {}
 
@@ -87,6 +104,7 @@ export class AddField implements Component {
 
   /**
    * Creates the text input element for the new field name.
+   * @returns The constructed input element.
    */
   private createKeyInput(): HTMLInputElement {
     const input = createElementWithClasses("input", [
@@ -100,6 +118,7 @@ export class AddField implements Component {
 
   /**
    * Creates the dropdown selector for the field type.
+   * @returns The constructed select element.
    */
   private createTypeSelect(): HTMLSelectElement {
     const select = createElementWithClasses("select", [
@@ -127,6 +146,7 @@ export class AddField implements Component {
 
   /**
    * Creates the "Add" button.
+   * @returns The constructed button element.
    */
   private createAddButton(): HTMLButtonElement {
     const button = createElementWithClasses("button", [

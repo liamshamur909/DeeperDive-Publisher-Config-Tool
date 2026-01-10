@@ -11,7 +11,6 @@ export class PrimitiveField implements Component {
   /** The parent DOM element where this component will be mounted. */
   rootElement: HTMLElement;
   /** The main DOM element of this component. */
-  /** The main DOM element of this component. */
   componentElement: HTMLElement;
 
   /**

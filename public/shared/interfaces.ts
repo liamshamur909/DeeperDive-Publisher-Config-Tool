@@ -10,10 +10,18 @@ export interface Component {
 
   /** Renders the component's HTML structure. */
   render(): void;
+
   /** Appends the component's element to the root element. */
   mount(): void;
-  /** Attaches event listeners to the component's elements. */
+
+  /**
+   * Attaches specific event listeners to the component's interactive elements.
+   * Should be called after rendering.
+   */
   attachEvents(): void;
-  /** Removes the component from the DOM and cleans up resources. */
+
+  /**
+   * Removes the component from the DOM and cleans up any attached event listeners or resources.
+   */
   destroy(): void;
 }

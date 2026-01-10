@@ -27,6 +27,13 @@ export class FormField implements Component {
 
   /**
    * Creates an instance of the FormField component.
+   *
+   * @param rootElement - The parent element to attach to.
+   * @param parentData - The object containing the data.
+   * @param key - The key of the field in `parentData`.
+   * @param onChange - Callback for value changes.
+   * @param onRemove - Optional callback for removing the field.
+   * @param isFixedStructure - Valid for object fields: prevents structure changes if true.
    */
   constructor(
     rootElement: HTMLElement,
@@ -60,6 +67,7 @@ export class FormField implements Component {
 
   /**
    * Renders the field based on the type of value (boolean, array, object, or primitive).
+   * Dispatches to specific sub-components.
    */
   render() {
     const value = this.parentData[this.key];
@@ -119,7 +127,7 @@ export class FormField implements Component {
 
   /**
    * Creates the label element, optionally wrapped in a header with a remove button.
-   * @param isCheckbox - Whether this label is for a checkbox input.
+   * @param isCheckbox - Whether this label is for a checkbox input (affects styling).
    * @returns The label element (or header wrapper).
    */
   private createLabel(isCheckbox: boolean = false): HTMLElement {

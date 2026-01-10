@@ -81,6 +81,7 @@ export class ObjectField implements Component {
 
   /**
    * Renders the list of all fields in the data object.
+   * Iterates through keys and creates field rows.
    */
   private renderFieldsList() {
     this.fieldsContainer.innerHTML = "";
@@ -91,6 +92,7 @@ export class ObjectField implements Component {
 
   /**
    * Renders the "Add Property" component.
+   * Provides logic to check for existing keys before adding.
    */
   private renderAddField() {
     new AddField(

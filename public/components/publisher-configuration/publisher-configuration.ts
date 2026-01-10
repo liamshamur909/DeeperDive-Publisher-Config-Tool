@@ -63,11 +63,6 @@ export class PublisherConfiguration implements Component {
 
   /**
    * Creates an instance of the PublisherConfiguration component.
-   * @param rootId - The ID of the HTML element to mount this component into.
-   * @param filename - The name of the configuration file to load.
-   */
-  /**
-   * Creates an instance of the PublisherConfiguration component.
    * @param rootElement - The HTML element to mount this component into.
    * @param filename - The name of the configuration file to load.
    */

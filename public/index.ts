@@ -1,3 +1,8 @@
+/**
+ * Entry point for the DeeperDive Publisher Config Tool.
+ * Handles the main application routing and initialization.
+ */
+
 import { Publishers } from "./components/publishers/publishers.js";
 import { PublisherConfiguration } from "./components/publisher-configuration/publisher-configuration.js";
 import { Snackbar } from "./components/snackbar/snackbar.js";
@@ -40,6 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
   navigateToPublishers();
 });
 
+/**
+ * Displays a global toast notification.
+ *
+ * @param message - The message text to display.
+ * @param type - The type of notification (info, success, error).
+ */
 export function showToast(
   message: string,
   type: SnackbarType = SnackbarType.INFO

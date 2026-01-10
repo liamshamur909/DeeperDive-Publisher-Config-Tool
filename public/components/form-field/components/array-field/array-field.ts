@@ -123,7 +123,7 @@ export class ArrayField implements Component {
   }
 
   /**
-   * Renders a nested object item.
+   * Renders a nested object item using ObjectField.
    */
   private renderNestedItem(container: HTMLElement, index: number) {
     new ObjectField(
@@ -152,6 +152,7 @@ export class ArrayField implements Component {
 
   /**
    * Creates the delete button for an item.
+   * @param index - The index of the item to remove.
    */
   private createDeleteButton(index: number): HTMLElement {
     const deleteButton = createElementWithClasses("button", [
@@ -170,6 +171,7 @@ export class ArrayField implements Component {
 
   /**
    * Handles adding a new item to the array.
+   * Uses the template if available, or the last item to infer structure.
    */
   private handleAddItem() {
     let newItem: any = "";
@@ -191,7 +193,9 @@ export class ArrayField implements Component {
   }
 
   /**
-   * Creates a template from an item, clearing string values.
+   * Creates a template from an item, clearing string values to empty strings.
+   * Retains object structure.
+   * @param item - The item to create a template from.
    */
   private createTemplate(item: any): any {
     if (typeof item === "object" && item !== null) {
