@@ -17,11 +17,10 @@
     <!-- dudi 2 - snackbar fixes (done) -->
     <!-- dudi 3 - folder structure (done) -->
     <!-- dudi 4 - are you sure (done) -->
-    <!-- dudi 5 - expand collapse -->
+    <!-- dudi 5 - expand collapse (done) -->
     <!-- dudi 6 - user guide -->
     <!-- dudi 7 - searchbar -->
-    <!-- dudi 8 - check about the importmap -->
-
+    <!-- dudi 8 - check about the importmap (done) -->
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
@@ -41,12 +40,5 @@
   <!-- Main Application Script -->
   <script type="module" src="../dist/public/index.js"></script>
   <!-- Import Map for bare module specifiers -->
-
-  <script type="importmap">
-    {
-      "imports": {
-        "diff": "https://cdn.jsdelivr.net/npm/diff@5.2.0/+esm"
-      }
-    }
-  </script>
+  <script type="importmap" src="shared/imports.json"></script>
 </html>

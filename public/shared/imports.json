@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "diff": "https://cdn.jsdelivr.net/npm/diff@5.2.0/+esm"
+  }
+}
