@@ -5,66 +5,62 @@ import { SnackbarType } from "../../index.js";
 export class Snackbar implements Component {
   rootElement: HTMLElement;
   componentElement: HTMLElement;
+  message: string;
+  type: SnackbarType;
+  duration: number;
 
-  constructor(rootElement: HTMLElement) {
-    this.rootElement = rootElement;
-    let existingContainer = document.getElementById("snackbar-container");
-    if (existingContainer) {
-      this.componentElement = existingContainer as HTMLElement;
-    } else {
-      this.componentElement = createElementWithClasses("div", []);
-      this.componentElement.id = "snackbar-container";
-      this.init();
+  constructor(
+    message: string,
+    type: SnackbarType = SnackbarType.INFO,
+    duration: number = 3000
+  ) {
+    this.message = message;
+    this.type = type;
+    this.duration = duration;
+
+    // The root is always the container, forcing it to exist if not
+    let container = document.getElementById("snackbar-container");
+    if (!container) {
+      container = createElementWithClasses("div", []);
+      container.id = "snackbar-container";
+      document.body.appendChild(container);
     }
+    this.rootElement = container as HTMLElement;
+    this.componentElement = document.createElement("div"); // Placeholder, set in render
+
+    this.init();
   }
 
   private init() {
     this.render();
     this.mount();
+    this.attachEvents();
   }
 
-  render(): void {}
+  render(): void {
+    this.componentElement = createElementWithClasses("div", [
+      "snackbar-toast",
+      `snackbar-toast__${this.type}`,
+    ]);
+    this.componentElement.textContent = this.message;
+  }
 
   mount(): void {
-    if (!this.rootElement.contains(this.componentElement)) {
-      this.rootElement.appendChild(this.componentElement);
-    }
+    this.rootElement.appendChild(this.componentElement);
   }
 
-  attachEvents(): void {}
+  attachEvents(): void {
+    // Auto-destroy after duration
+    setTimeout(() => {
+      this.destroy();
+    }, this.duration);
+  }
 
   destroy(): void {
-    this.componentElement.remove();
-  }
-
-  /**
-   * Shows a toast notification.
-   * @param message The message to display.
-   * @param type The type of notification (success, error, info).
-   * @param duration Duration in ms before auto-dismissing (default 3000ms).
-   */
-  public show(
-    message: string,
-    type: SnackbarType = SnackbarType.INFO,
-    duration: number = 3000
-  ) {
-    const toast = createElementWithClasses("div", [
-      "snackbar-toast",
-      `snackbar-toast__${type}`,
-    ]);
-    toast.textContent = message;
-
-    this.componentElement.appendChild(toast);
-
-    setTimeout(() => {
-      this.dismiss(toast);
-    }, duration);
-  }
-
-  private dismiss(toast: HTMLElement) {
-    toast.classList.add("hide");
-    toast.addEventListener("animationend", () => {
-      toast.remove();
+    this.componentElement.classList.add("hide");
+    this.componentElement.addEventListener("animationend", () => {
+      this.componentElement.remove();
+      // Optional: If container is empty, we could remove it, but keeping it is fine.
     });
   }
 }

@@ -40,11 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
   navigateToPublishers();
 });
 
-const appSnackbar = new Snackbar(document.body);
-
 export function showToast(
   message: string,
   type: SnackbarType = SnackbarType.INFO
 ) {
-  appSnackbar.show(message, type);
+  new Snackbar(message, type);
 }
