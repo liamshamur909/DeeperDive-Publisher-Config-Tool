@@ -1,9 +1,7 @@
-import {
-  navigateToPublishers,
-  showToast,
-  api,
-  SnackbarType,
-} from "../../index.js";
+import { navigateToPublishers } from "../../index.js";
+import { Snackbar } from "../snackbar/snackbar.js";
+import { api } from "../../shared/api-client.js";
+import { SnackbarType } from "../../shared/enums.js";
 import { FormField } from "../form-field/form-field.js";
 import { Component } from "../../shared/interfaces.js";
 import { createElementWithClasses } from "../../shared/utils.js";
@@ -168,7 +166,7 @@ export class PublisherConfiguration implements Component {
       this.initialConfig = JSON.parse(JSON.stringify(json));
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", SnackbarType.ERROR);
+      new Snackbar("Failed to fetch publishers", SnackbarType.ERROR);
     }
   }
 
@@ -296,11 +294,14 @@ export class PublisherConfiguration implements Component {
       container,
       (key: string, initialValue: any) => {
         if (key in fields) {
-          showToast("Field already exists", SnackbarType.ERROR);
+          new Snackbar("Field already exists", SnackbarType.ERROR);
           return false;
         }
         if (requiredFields.includes(key)) {
-          showToast("Cannot add a required field manually", SnackbarType.ERROR);
+          new Snackbar(
+            "Cannot add a required field manually",
+            SnackbarType.ERROR
+          );
           return false;
         }
 
@@ -328,7 +329,7 @@ export class PublisherConfiguration implements Component {
         JSON.stringify(this.publisherConfig) ===
         JSON.stringify(this.initialConfig)
       ) {
-        showToast("No changes were made", SnackbarType.INFO);
+        new Snackbar("No changes were made", SnackbarType.INFO);
         return;
       }
 
@@ -340,10 +341,10 @@ export class PublisherConfiguration implements Component {
       if (!res.ok) throw new Error("Failed to save");
 
       this.initialConfig = JSON.parse(JSON.stringify(this.publisherConfig));
-      showToast("Configuration saved successfully!", SnackbarType.SUCCESS);
+      new Snackbar("Configuration saved successfully!", SnackbarType.SUCCESS);
     } catch (error) {
       console.error("Save failed", error);
-      showToast("Failed to save configuration.", SnackbarType.ERROR);
+      new Snackbar("Failed to save configuration.", SnackbarType.ERROR);
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component } from "../../shared/interfaces.js";
 import { createElementWithClasses } from "../../shared/utils.js";
-import { SnackbarType } from "../../index.js";
+import { SnackbarType } from "../../shared/enums.js";
 
 /**
  * A toast notification component.

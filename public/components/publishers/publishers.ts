@@ -1,9 +1,7 @@
-import {
-  navigateToPublisherConfigurations,
-  showToast,
-  api,
-  SnackbarType,
-} from "../../index.js";
+import { navigateToPublisherConfigurations } from "../../index.js";
+import { Snackbar } from "../snackbar/snackbar.js";
+import { api } from "../../shared/api-client.js";
+import { SnackbarType } from "../../shared/enums.js";
 import { Component } from "../../shared/interfaces.js";
 import { createElementWithClasses } from "../../shared/utils.js";
 
@@ -128,7 +126,7 @@ export class Publishers implements Component {
       return publishersArray;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", SnackbarType.ERROR);
+      new Snackbar("Failed to fetch publishers", SnackbarType.ERROR);
       return [];
     }
   }

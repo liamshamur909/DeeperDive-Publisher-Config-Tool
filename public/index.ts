@@ -5,11 +5,6 @@
 
 import { Publishers } from "./components/publishers/publishers.js";
 import { PublisherConfiguration } from "./components/publisher-configuration/publisher-configuration.js";
-import { Snackbar } from "./components/snackbar/snackbar.js";
-import { SnackbarType } from "./shared/enums.js";
-
-export { SnackbarType, FieldType, HttpMethod } from "./shared/enums.js";
-export { api } from "./shared/api-client.js";
 
 const appElement = document.getElementById("app");
 
@@ -44,17 +39,3 @@ export function navigateToPublisherConfigurations(filename: string) {
 document.addEventListener("DOMContentLoaded", () => {
   navigateToPublishers();
 });
-
-// dudi - remove this
-/**
- * Displays a global toast notification.
- *
- * @param message - The message text to display.
- * @param type - The type of notification (info, success, error).
- */
-export function showToast(
-  message: string,
-  type: SnackbarType = SnackbarType.INFO
-) {
-  new Snackbar(message, type);
-}

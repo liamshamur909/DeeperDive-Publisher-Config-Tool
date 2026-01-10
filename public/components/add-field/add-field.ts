@@ -1,6 +1,7 @@
 import { Component } from "../../shared/interfaces.js";
 import { createElementWithClasses } from "../../shared/utils.js";
-import { showToast, FieldType, SnackbarType } from "../../index.js";
+import { Snackbar } from "../snackbar/snackbar.js";
+import { FieldType, SnackbarType } from "../../shared/enums.js";
 
 /**
  * Component for adding a new field with a name and a type selector.
@@ -168,7 +169,7 @@ export class AddField implements Component {
     const type = this.fixedType || (this.typeSelect.value as FieldType);
 
     if (!key) {
-      showToast("Field name cannot be empty", SnackbarType.ERROR);
+      new Snackbar("Field name cannot be empty", SnackbarType.ERROR);
       return;
     }
 

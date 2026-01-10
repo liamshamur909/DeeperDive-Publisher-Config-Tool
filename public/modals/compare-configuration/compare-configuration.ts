@@ -2,7 +2,7 @@ import { Component } from "../../shared/interfaces.js";
 import { createElementWithClasses } from "../../shared/utils.js";
 import { diffLines, Change } from "diff";
 import { DiffType } from "../../shared/enums.js";
-import { api } from "../../index.js";
+import { api } from "../../shared/api-client.js";
 
 /**
  * A modal component that compares two configuration objects and displays the differences.
