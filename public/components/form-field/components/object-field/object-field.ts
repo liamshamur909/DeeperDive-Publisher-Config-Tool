@@ -1,6 +1,6 @@
-import { Component } from "../../../interfaces.js";
-import { createElementWithClasses } from "../../../utils.js";
-import { showToast } from "../../../index.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
+import { showToast, FieldType, SnackbarType } from "../../../../index.js";
 import { AddField } from "../../../add-field/add-field.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 
@@ -81,6 +81,7 @@ export class ObjectField implements Component {
 
   /**
    * Renders the list of all fields in the data object.
+   * Iterates through keys and creates field rows.
    */
   private renderFieldsList() {
     this.fieldsContainer.innerHTML = "";
@@ -91,13 +92,14 @@ export class ObjectField implements Component {
 
   /**
    * Renders the "Add Property" component.
+   * Provides logic to check for existing keys before adding.
    */
   private renderAddField() {
     new AddField(
       this.componentElement,
       (key: string, initialValue: any) => {
         if (key in this.data) {
-          showToast("Property already exists", "error");
+          showToast("Property already exists", SnackbarType.ERROR);
           return false;
         }
 
@@ -107,7 +109,7 @@ export class ObjectField implements Component {
         return true;
       },
       "New property name",
-      "string" // Enforce string type
+      FieldType.STRING // Enforce string type
     );
   }
 

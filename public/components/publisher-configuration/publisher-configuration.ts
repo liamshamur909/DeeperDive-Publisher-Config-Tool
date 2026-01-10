@@ -1,8 +1,14 @@
-import { navigateToPublishers, showToast, api } from "../index.js";
+import {
+  navigateToPublishers,
+  showToast,
+  api,
+  SnackbarType,
+} from "../../index.js";
 import { FormField } from "../form-field/form-field.js";
-import { Component } from "../interfaces.js";
-import { createElementWithClasses } from "../utils.js";
+import { Component } from "../../shared/interfaces.js";
+import { createElementWithClasses } from "../../shared/utils.js";
 import { AddField } from "../add-field/add-field.js";
+import { CompareConfiguration } from "../../modals/compare-configuration/compare-configuration.js";
 
 /**
  * Represents the configuration for a specific page within a publisher's setup.
@@ -53,11 +59,9 @@ export class PublisherConfiguration implements Component {
   /** The name of the file currently being edited, used for saving/downloading. */
   currentFilename: string = "";
 
-  /**
-   * Creates an instance of the PublisherConfiguration component.
-   * @param rootId - The ID of the HTML element to mount this component into.
-   * @param filename - The name of the configuration file to load.
-   */
+  /** Deep copy of the initial configuration for change detection. */
+  initialConfig: PublisherConfig | null = null;
+
   /**
    * Creates an instance of the PublisherConfiguration component.
    * @param rootElement - The HTML element to mount this component into.
@@ -94,6 +98,7 @@ export class PublisherConfiguration implements Component {
       <div class="controls">
         <button id="back-button" class="back-button base-button">Back</button>
         <button id="save-button" class="save-button base-button">Save & Validate</button>
+        <button id="compare-button" class="compare-button base-button">Compare w/ Original</button>
         <button id="download-button" class="download-button base-button">Download JSON</button>
       </div>
       <div class="content-wrapper">
@@ -135,6 +140,12 @@ export class PublisherConfiguration implements Component {
     if (downloadButton) {
       downloadButton.addEventListener("click", () => this.downloadJson());
     }
+
+    const compareButton =
+      this.componentElement.querySelector("#compare-button");
+    if (compareButton) {
+      compareButton.addEventListener("click", () => this.openCompareModal());
+    }
   }
 
   /**
@@ -154,9 +165,10 @@ export class PublisherConfiguration implements Component {
       if (!res.ok) throw new Error(`Failed to fetch publishers: ${res.status}`);
       const json = await res.json();
       this.publisherConfig = json;
+      this.initialConfig = JSON.parse(JSON.stringify(json));
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", "error");
+      showToast("Failed to fetch publishers", SnackbarType.ERROR);
     }
   }
 
@@ -284,11 +296,11 @@ export class PublisherConfiguration implements Component {
       container,
       (key: string, initialValue: any) => {
         if (key in fields) {
-          showToast("Field already exists", "error");
+          showToast("Field already exists", SnackbarType.ERROR);
           return false;
         }
         if (requiredFields.includes(key)) {
-          showToast("Cannot add a required field manually", "error");
+          showToast("Cannot add a required field manually", SnackbarType.ERROR);
           return false;
         }
 
@@ -312,6 +324,14 @@ export class PublisherConfiguration implements Component {
    */
   private async saveChanges() {
     try {
+      if (
+        JSON.stringify(this.publisherConfig) ===
+        JSON.stringify(this.initialConfig)
+      ) {
+        showToast("No changes were made", SnackbarType.INFO);
+        return;
+      }
+
       const res = await api.put(
         `/api/publisher/${this.currentFilename}`,
         this.publisherConfig
@@ -319,11 +339,31 @@ export class PublisherConfiguration implements Component {
 
       if (!res.ok) throw new Error("Failed to save");
 
-      showToast("Configuration saved successfully!", "success");
+      this.initialConfig = JSON.parse(JSON.stringify(this.publisherConfig));
+      showToast("Configuration saved successfully!", SnackbarType.SUCCESS);
     } catch (error) {
       console.error("Save failed", error);
-      showToast("Failed to save configuration.", "error");
+      showToast("Failed to save configuration.", SnackbarType.ERROR);
     }
+  }
+
+  /**
+   * Opens the comparison modal to show differences between the initial and current configuration.
+   */
+  private openCompareModal() {
+    if (
+      JSON.stringify(this.publisherConfig) ===
+      JSON.stringify(this.initialConfig)
+    ) {
+      showToast("No changes were made", SnackbarType.INFO);
+      return;
+    }
+
+    new CompareConfiguration(
+      document.body, // Mount to body to overlay everything
+      this.initialConfig,
+      this.publisherConfig
+    );
   }
 
   /**

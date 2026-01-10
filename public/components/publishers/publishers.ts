@@ -1,6 +1,11 @@
-import { navigateToPublisherConfigurations, showToast, api } from "../index.js";
-import { Component } from "../interfaces.js";
-import { createElementWithClasses } from "../utils.js";
+import {
+  navigateToPublisherConfigurations,
+  showToast,
+  api,
+  SnackbarType,
+} from "../../index.js";
+import { Component } from "../../shared/interfaces.js";
+import { createElementWithClasses } from "../../shared/utils.js";
 
 /**
  * Represents a Publisher entity fetched from the API.
@@ -80,9 +85,7 @@ export class Publishers implements Component {
   /**
    * Attaches necessary event listeners.
    */
-  attachEvents() {
-    console.log("Publishers event handlers attached");
-  }
+  attachEvents() {}
 
   /**
    * Removes the component from the DOM.
@@ -125,7 +128,7 @@ export class Publishers implements Component {
       return publishersArray;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", "error");
+      showToast("Failed to fetch publishers", SnackbarType.ERROR);
       return [];
     }
   }

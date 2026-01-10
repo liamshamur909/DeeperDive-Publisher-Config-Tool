@@ -1,7 +1,15 @@
-import { Publishers } from "./publishers/publishers.js";
-import { PublisherConfiguration } from "./publisher-configuration/publisher-configuration.js";
-import { Snackbar } from "./snackbar/snackbar.js";
-export { api } from "./api-client.js";
+/**
+ * Entry point for the DeeperDive Publisher Config Tool.
+ * Handles the main application routing and initialization.
+ */
+
+import { Publishers } from "./components/publishers/publishers.js";
+import { PublisherConfiguration } from "./components/publisher-configuration/publisher-configuration.js";
+import { Snackbar } from "./components/snackbar/snackbar.js";
+import { SnackbarType } from "./shared/enums.js";
+
+export { SnackbarType, FieldType, HttpMethod } from "./shared/enums.js";
+export { api } from "./shared/api-client.js";
 
 const appElement = document.getElementById("app");
 
@@ -37,11 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
   navigateToPublishers();
 });
 
-const appSnackbar = new Snackbar(document.body);
-
+/**
+ * Displays a global toast notification.
+ *
+ * @param message - The message text to display.
+ * @param type - The type of notification (info, success, error).
+ */
 export function showToast(
   message: string,
-  type: "success" | "error" | "info" = "info"
+  type: SnackbarType = SnackbarType.INFO
 ) {
-  appSnackbar.show(message, type);
+  new Snackbar(message, type);
 }
