@@ -1,4 +1,9 @@
-import { navigateToPublishers, showToast, api } from "../index.js";
+import {
+  navigateToPublishers,
+  showToast,
+  api,
+  SnackbarType,
+} from "../index.js";
 import { FormField } from "../form-field/form-field.js";
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
@@ -156,7 +161,7 @@ export class PublisherConfiguration implements Component {
       this.publisherConfig = json;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", "error");
+      showToast("Failed to fetch publishers", SnackbarType.ERROR);
     }
   }
 
@@ -284,11 +289,11 @@ export class PublisherConfiguration implements Component {
       container,
       (key: string, initialValue: any) => {
         if (key in fields) {
-          showToast("Field already exists", "error");
+          showToast("Field already exists", SnackbarType.ERROR);
           return false;
         }
         if (requiredFields.includes(key)) {
-          showToast("Cannot add a required field manually", "error");
+          showToast("Cannot add a required field manually", SnackbarType.ERROR);
           return false;
         }
 
@@ -319,10 +324,10 @@ export class PublisherConfiguration implements Component {
 
       if (!res.ok) throw new Error("Failed to save");
 
-      showToast("Configuration saved successfully!", "success");
+      showToast("Configuration saved successfully!", SnackbarType.SUCCESS);
     } catch (error) {
       console.error("Save failed", error);
-      showToast("Failed to save configuration.", "error");
+      showToast("Failed to save configuration.", SnackbarType.ERROR);
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
-import { showToast } from "../index.js";
+import { showToast, FieldType, SnackbarType } from "../index.js";
 
 /**
  * Component for adding a new field with a name and a type selector.
@@ -25,13 +25,13 @@ export class AddField implements Component {
   /**
    * Optional fixed type. If set, the type selector is hidden and this type is used.
    */
-  private fixedType?: "string" | "number" | "boolean" | "array" | "object";
+  private fixedType?: FieldType;
 
   constructor(
     rootElement: HTMLElement,
     onAdd: (key: string, value: any) => boolean,
     placeholder: string = "Enter new field name",
-    fixedType?: "string" | "number" | "boolean" | "array" | "object"
+    fixedType?: FieldType
   ) {
     this.rootElement = rootElement;
     this.onAdd = onAdd;
@@ -107,11 +107,19 @@ export class AddField implements Component {
       "base-input",
     ]) as HTMLSelectElement;
 
-    const types = ["String", "Number", "Boolean", "Array", "Object"];
+    // Use the enum values for options
+    const types = [
+      { label: "String", value: FieldType.STRING },
+      { label: "Number", value: FieldType.NUMBER },
+      { label: "Boolean", value: FieldType.BOOLEAN },
+      { label: "Array", value: FieldType.ARRAY },
+      { label: "Object", value: FieldType.OBJECT },
+    ];
+
     types.forEach((type) => {
       const option = document.createElement("option");
-      option.value = type.toLowerCase();
-      option.textContent = type;
+      option.value = type.value;
+      option.textContent = type.label;
       select.appendChild(option);
     });
     return select;
@@ -136,28 +144,29 @@ export class AddField implements Component {
    */
   private handleAdd() {
     const key = this.keyInput.value.trim();
-    const type = this.fixedType || this.typeSelect.value;
+    // Use type assertion or careful handling since value comes from DOM
+    const type = this.fixedType || (this.typeSelect.value as FieldType);
 
     if (!key) {
-      showToast("Field name cannot be empty", "error");
+      showToast("Field name cannot be empty", SnackbarType.ERROR);
       return;
     }
 
     let initialValue: any = "";
     switch (type) {
-      case "number":
+      case FieldType.NUMBER:
         initialValue = 0;
         break;
-      case "boolean":
+      case FieldType.BOOLEAN:
         initialValue = false;
         break;
-      case "array":
+      case FieldType.ARRAY:
         initialValue = [];
         break;
-      case "object":
+      case FieldType.OBJECT:
         initialValue = {};
         break;
-      case "string":
+      case FieldType.STRING:
       default:
         initialValue = "";
         break;

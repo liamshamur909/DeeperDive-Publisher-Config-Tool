@@ -1,6 +1,9 @@
 import { Publishers } from "./publishers/publishers.js";
 import { PublisherConfiguration } from "./publisher-configuration/publisher-configuration.js";
 import { Snackbar } from "./snackbar/snackbar.js";
+import { SnackbarType } from "./enums.js";
+
+export { SnackbarType, FieldType, HttpMethod } from "./enums.js";
 export { api } from "./api-client.js";
 
 const appElement = document.getElementById("app");
@@ -41,7 +44,7 @@ const appSnackbar = new Snackbar(document.body);
 
 export function showToast(
   message: string,
-  type: "success" | "error" | "info" = "info"
+  type: SnackbarType = SnackbarType.INFO
 ) {
   appSnackbar.show(message, type);
 }

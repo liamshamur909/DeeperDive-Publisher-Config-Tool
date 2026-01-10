@@ -1,7 +1,6 @@
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
-
-type SnackbarType = "success" | "error" | "info";
+import { SnackbarType } from "../index.js";
 
 export class Snackbar implements Component {
   rootElement: HTMLElement;
@@ -46,7 +45,7 @@ export class Snackbar implements Component {
    */
   public show(
     message: string,
-    type: SnackbarType = "info",
+    type: SnackbarType = SnackbarType.INFO,
     duration: number = 3000
   ) {
     const toast = createElementWithClasses("div", [

@@ -1,6 +1,6 @@
 import { Component } from "../../../interfaces.js";
 import { createElementWithClasses } from "../../../utils.js";
-import { showToast } from "../../../index.js";
+import { showToast, FieldType, SnackbarType } from "../../../index.js";
 import { AddField } from "../../../add-field/add-field.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 
@@ -97,7 +97,7 @@ export class ObjectField implements Component {
       this.componentElement,
       (key: string, initialValue: any) => {
         if (key in this.data) {
-          showToast("Property already exists", "error");
+          showToast("Property already exists", SnackbarType.ERROR);
           return false;
         }
 
@@ -107,7 +107,7 @@ export class ObjectField implements Component {
         return true;
       },
       "New property name",
-      "string" // Enforce string type
+      FieldType.STRING // Enforce string type
     );
   }
 

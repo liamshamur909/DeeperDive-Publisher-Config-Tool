@@ -1,4 +1,9 @@
-import { navigateToPublisherConfigurations, showToast, api } from "../index.js";
+import {
+  navigateToPublisherConfigurations,
+  showToast,
+  api,
+  SnackbarType,
+} from "../index.js";
 import { Component } from "../interfaces.js";
 import { createElementWithClasses } from "../utils.js";
 
@@ -125,7 +130,7 @@ export class Publishers implements Component {
       return publishersArray;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", "error");
+      showToast("Failed to fetch publishers", SnackbarType.ERROR);
       return [];
     }
   }
