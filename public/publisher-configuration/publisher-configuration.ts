@@ -58,6 +58,9 @@ export class PublisherConfiguration implements Component {
   /** The name of the file currently being edited, used for saving/downloading. */
   currentFilename: string = "";
 
+  /** Deep copy of the initial configuration for change detection. */
+  initialConfig: PublisherConfig | null = null;
+
   /**
    * Creates an instance of the PublisherConfiguration component.
    * @param rootId - The ID of the HTML element to mount this component into.
@@ -159,6 +162,7 @@ export class PublisherConfiguration implements Component {
       if (!res.ok) throw new Error(`Failed to fetch publishers: ${res.status}`);
       const json = await res.json();
       this.publisherConfig = json;
+      this.initialConfig = JSON.parse(JSON.stringify(json));
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
       showToast("Failed to fetch publishers", SnackbarType.ERROR);
@@ -317,6 +321,14 @@ export class PublisherConfiguration implements Component {
    */
   private async saveChanges() {
     try {
+      if (
+        JSON.stringify(this.publisherConfig) ===
+        JSON.stringify(this.initialConfig)
+      ) {
+        showToast("No changes were made", SnackbarType.INFO);
+        return;
+      }
+
       const res = await api.put(
         `/api/publisher/${this.currentFilename}`,
         this.publisherConfig
@@ -324,6 +336,7 @@ export class PublisherConfiguration implements Component {
 
       if (!res.ok) throw new Error("Failed to save");
 
+      this.initialConfig = JSON.parse(JSON.stringify(this.publisherConfig));
       showToast("Configuration saved successfully!", SnackbarType.SUCCESS);
     } catch (error) {
       console.error("Save failed", error);
