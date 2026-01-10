@@ -22,31 +22,24 @@ export class Loader implements Component {
 
   private init() {
     this.render();
-    this.mount();
   }
 
   render(): void {
-    const spinner = createElementWithClasses("div", ["loader-spinner"]);
+    const spinner = createElementWithClasses("div", [
+      "loader-spinner",
+      "visible",
+    ]);
     this.componentElement.appendChild(spinner);
   }
 
   mount(): void {
-    if (!this.rootElement.contains(this.componentElement)) {
-      this.rootElement.appendChild(this.componentElement);
-    }
+    this.rootElement.appendChild(this.componentElement);
   }
 
   attachEvents(): void {}
 
   destroy(): void {
-    this.componentElement.remove();
-  }
-
-  public show() {
-    this.componentElement.classList.add("visible");
-  }
-
-  public hide() {
     this.componentElement.classList.remove("visible");
+    this.componentElement.remove();
   }
 }

@@ -7,12 +7,12 @@ const request = async (
   input: RequestInfo,
   init?: RequestInit
 ): Promise<Response> => {
-  loader.show();
+  loader.mount();
   try {
     const response = await fetch(input, init);
     return response;
   } finally {
-    loader.hide();
+    loader.destroy();
   }
 };
 

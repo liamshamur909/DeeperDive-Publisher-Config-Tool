@@ -85,9 +85,7 @@ export class Publishers implements Component {
   /**
    * Attaches necessary event listeners.
    */
-  attachEvents() {
-    console.log("Publishers event handlers attached");
-  }
+  attachEvents() {}
 
   /**
    * Removes the component from the DOM.
