@@ -1,6 +1,6 @@
-import { Component } from "../../../interfaces.js";
-import { createElementWithClasses } from "../../../utils.js";
-import { showToast, FieldType, SnackbarType } from "../../../index.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
+import { showToast, FieldType, SnackbarType } from "../../../../index.js";
 import { AddField } from "../../../add-field/add-field.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 

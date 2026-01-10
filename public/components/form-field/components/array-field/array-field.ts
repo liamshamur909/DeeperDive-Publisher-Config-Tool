@@ -1,5 +1,5 @@
-import { Component } from "../../../interfaces.js";
-import { createElementWithClasses } from "../../../utils.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 import { ObjectField } from "../object-field/object-field.js";
 

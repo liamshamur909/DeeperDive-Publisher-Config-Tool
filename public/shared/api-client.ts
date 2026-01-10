@@ -1,5 +1,5 @@
-import { Loader } from "./loader/loader.js";
-import { HttpMethod } from "./index.js";
+import { Loader } from "../components/loader/loader.js";
+import { HttpMethod } from "./enums.js";
 
 const loader = new Loader(document.body);
 

@@ -1,6 +1,6 @@
-import { Component } from "../interfaces.js";
-import { createElementWithClasses } from "../utils.js";
-import { SnackbarType } from "../index.js";
+import { Component } from "../../shared/interfaces.js";
+import { createElementWithClasses } from "../../shared/utils.js";
+import { SnackbarType } from "../../index.js";
 
 export class Snackbar implements Component {
   rootElement: HTMLElement;

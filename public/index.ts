@@ -1,10 +1,10 @@
-import { Publishers } from "./publishers/publishers.js";
-import { PublisherConfiguration } from "./publisher-configuration/publisher-configuration.js";
-import { Snackbar } from "./snackbar/snackbar.js";
-import { SnackbarType } from "./enums.js";
+import { Publishers } from "./components/publishers/publishers.js";
+import { PublisherConfiguration } from "./components/publisher-configuration/publisher-configuration.js";
+import { Snackbar } from "./components/snackbar/snackbar.js";
+import { SnackbarType } from "./shared/enums.js";
 
-export { SnackbarType, FieldType, HttpMethod } from "./enums.js";
-export { api } from "./api-client.js";
+export { SnackbarType, FieldType, HttpMethod } from "./shared/enums.js";
+export { api } from "./shared/api-client.js";
 
 const appElement = document.getElementById("app");
 

@@ -3,10 +3,10 @@ import {
   showToast,
   api,
   SnackbarType,
-} from "../index.js";
+} from "../../index.js";
 import { FormField } from "../form-field/form-field.js";
-import { Component } from "../interfaces.js";
-import { createElementWithClasses } from "../utils.js";
+import { Component } from "../../shared/interfaces.js";
+import { createElementWithClasses } from "../../shared/utils.js";
 import { AddField } from "../add-field/add-field.js";
 
 /**

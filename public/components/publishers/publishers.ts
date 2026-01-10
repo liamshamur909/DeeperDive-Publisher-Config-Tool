@@ -3,9 +3,9 @@ import {
   showToast,
   api,
   SnackbarType,
-} from "../index.js";
-import { Component } from "../interfaces.js";
-import { createElementWithClasses } from "../utils.js";
+} from "../../index.js";
+import { Component } from "../../shared/interfaces.js";
+import { createElementWithClasses } from "../../shared/utils.js";
 
 /**
  * Represents a Publisher entity fetched from the API.

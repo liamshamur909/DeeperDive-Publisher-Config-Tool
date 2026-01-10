@@ -1,6 +1,6 @@
-import { Component } from "../interfaces.js";
-import { createElementWithClasses } from "../utils.js";
-import { showToast, FieldType, SnackbarType } from "../index.js";
+import { Component } from "../../shared/interfaces.js";
+import { createElementWithClasses } from "../../shared/utils.js";
+import { showToast, FieldType, SnackbarType } from "../../index.js";
 
 /**
  * Component for adding a new field with a name and a type selector.
