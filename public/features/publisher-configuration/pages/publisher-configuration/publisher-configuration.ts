@@ -318,7 +318,22 @@ export class PublisherConfiguration implements Component {
    * Navigates back to the main publishers list.
    */
   private goBack() {
-    navigateToPublishers();
+    if (
+      JSON.stringify(this.publisherConfig) ===
+      JSON.stringify(this.initialConfig)
+    ) {
+      navigateToPublishers();
+      return;
+    }
+
+    new AreYouSure(
+      document.body,
+      () => {
+        navigateToPublishers();
+      },
+      "Discard Changes?",
+      "You have unsaved changes. Are you sure you want to leave? Your changes will be lost."
+    );
   }
 
   /**
@@ -350,7 +365,12 @@ export class PublisherConfiguration implements Component {
       }
     };
 
-    new AreYouSure(document.body, handleSave);
+    new AreYouSure(
+      document.body,
+      handleSave,
+      "Save Changes?",
+      "Are you sure you want to save your changes? This will overwrite the current configuration."
+    );
   }
 
   /**
