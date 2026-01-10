@@ -7,6 +7,7 @@ import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 import { AddField } from "../../components/add-field/add-field.js";
 import { CompareConfiguration } from "../../../compare-configuration/modals/compare-configuration/compare-configuration.js";
+import { AreYouSure } from "../../../../shared/modals/are-you-sure/are-you-sure.js";
 
 /**
  * Represents the configuration for a specific page within a publisher's setup.
@@ -95,7 +96,7 @@ export class PublisherConfiguration implements Component {
     this.componentElement.innerHTML = `
       <div class="controls">
         <button id="back-button" class="back-button base-button">Back</button>
-        <button id="save-button" class="save-button base-button">Save & Validate</button>
+        <button id="save-button" class="save-button base-button">Save Changes</button>
         <button id="compare-button" class="compare-button base-button">Version Compare</button>
         <button id="download-button" class="download-button base-button">Download JSON</button>
       </div>
@@ -324,28 +325,32 @@ export class PublisherConfiguration implements Component {
    * Simulates saving the changes (currently just logs to console and shows a status message).
    */
   private async saveChanges() {
-    try {
-      if (
-        JSON.stringify(this.publisherConfig) ===
-        JSON.stringify(this.initialConfig)
-      ) {
-        new Snackbar("No changes were made", SnackbarType.INFO);
-        return;
-      }
-
-      const res = await api.put(
-        `/api/publisher/${this.currentFilename}`,
-        this.publisherConfig
-      );
-
-      if (!res.ok) throw new Error("Failed to save");
-
-      this.initialConfig = JSON.parse(JSON.stringify(this.publisherConfig));
-      new Snackbar("Configuration saved successfully!", SnackbarType.SUCCESS);
-    } catch (error) {
-      console.error("Save failed", error);
-      new Snackbar("Failed to save configuration.", SnackbarType.ERROR);
+    if (
+      JSON.stringify(this.publisherConfig) ===
+      JSON.stringify(this.initialConfig)
+    ) {
+      new Snackbar("No changes were made", SnackbarType.INFO);
+      return;
     }
+
+    const handleSave = async () => {
+      try {
+        const res = await api.put(
+          `/api/publisher/${this.currentFilename}`,
+          this.publisherConfig
+        );
+
+        if (!res.ok) throw new Error("Failed to save");
+
+        this.initialConfig = JSON.parse(JSON.stringify(this.publisherConfig));
+        new Snackbar("Configuration saved successfully!", SnackbarType.SUCCESS);
+      } catch (error) {
+        console.error("Save failed", error);
+        new Snackbar("Failed to save configuration.", SnackbarType.ERROR);
+      }
+    };
+
+    new AreYouSure(document.body, handleSave);
   }
 
   /**

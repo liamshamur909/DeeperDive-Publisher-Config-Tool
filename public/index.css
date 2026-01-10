@@ -22,3 +22,4 @@
 
 /* Modals */
 @import "./features/compare-configuration/modals/compare-configuration/compare-configuration.css";
+@import "./shared/modals/are-you-sure/are-you-sure.css";
