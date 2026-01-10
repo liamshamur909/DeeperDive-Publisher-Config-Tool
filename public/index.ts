@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   navigateToPublishers();
 });
 
+// dudi - remove this
 /**
  * Displays a global toast notification.
  *
