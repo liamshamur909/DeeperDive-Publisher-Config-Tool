@@ -1,9 +1,9 @@
-import { navigateToPublisherConfigurations } from "../../index.js";
-import { Snackbar } from "../snackbar/snackbar.js";
-import { api } from "../../shared/api-client.js";
-import { SnackbarType } from "../../shared/enums.js";
-import { Component } from "../../shared/interfaces.js";
-import { createElementWithClasses } from "../../shared/utils.js";
+import { navigateToPublisherConfigurations } from "../../../../index.js";
+import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
+import { api } from "../../../../shared/api-client.js";
+import { SnackbarType } from "../../../../shared/enums.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
 
 /**
  * Represents a Publisher entity fetched from the API.

@@ -1,8 +1,8 @@
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
-import { Snackbar } from "../../../snackbar/snackbar.js";
+import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
 import { FieldType, SnackbarType } from "../../../../shared/enums.js";
-import { AddField } from "../../../add-field/add-field.js";
+import { AddField } from "../add-field/add-field.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 
 /**

@@ -1,12 +1,12 @@
-import { navigateToPublishers } from "../../index.js";
-import { Snackbar } from "../snackbar/snackbar.js";
-import { api } from "../../shared/api-client.js";
-import { SnackbarType } from "../../shared/enums.js";
-import { FormField } from "../form-field/form-field.js";
-import { Component } from "../../shared/interfaces.js";
-import { createElementWithClasses } from "../../shared/utils.js";
-import { AddField } from "../add-field/add-field.js";
-import { CompareConfiguration } from "../../modals/compare-configuration/compare-configuration.js";
+import { navigateToPublishers } from "../../../../index.js";
+import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
+import { api } from "../../../../shared/api-client.js";
+import { SnackbarType } from "../../../../shared/enums.js";
+import { FormField } from "../../components/form-field/form-field.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
+import { AddField } from "../../components/add-field/add-field.js";
+import { CompareConfiguration } from "../../../compare-configuration/modals/compare-configuration/compare-configuration.js";
 
 /**
  * Represents the configuration for a specific page within a publisher's setup.

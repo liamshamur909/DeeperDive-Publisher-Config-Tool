@@ -1,8 +1,8 @@
-import { Component } from "../../shared/interfaces.js";
-import { createElementWithClasses } from "../../shared/utils.js";
-import { PrimitiveField } from "./components/primitive-field/primitive-field.js";
-import { ObjectField } from "./components/object-field/object-field.js";
-import { ArrayField } from "./components/array-field/array-field.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
+import { PrimitiveField } from "../primitive-field/primitive-field.js";
+import { ObjectField } from "../object-field/object-field.js";
+import { ArrayField } from "../array-field/array-field.js";
 
 /**
  * Component responsible for rendering a single form field.

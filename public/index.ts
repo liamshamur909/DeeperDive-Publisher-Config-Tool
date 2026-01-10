@@ -3,8 +3,8 @@
  * Handles the main application routing and initialization.
  */
 
-import { Publishers } from "./components/publishers/publishers.js";
-import { PublisherConfiguration } from "./components/publisher-configuration/publisher-configuration.js";
+import { Publishers } from "./features/publishers/pages/publishers/publishers.js";
+import { PublisherConfiguration } from "./features/publisher-configuration/pages/publisher-configuration/publisher-configuration.js";
 
 const appElement = document.getElementById("app");
 

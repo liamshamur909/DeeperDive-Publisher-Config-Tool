@@ -1,7 +1,7 @@
-import { Component } from "../../shared/interfaces.js";
-import { createElementWithClasses } from "../../shared/utils.js";
-import { Snackbar } from "../snackbar/snackbar.js";
-import { FieldType, SnackbarType } from "../../shared/enums.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
+import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
+import { FieldType, SnackbarType } from "../../../../shared/enums.js";
 
 /**
  * Component for adding a new field with a name and a type selector.

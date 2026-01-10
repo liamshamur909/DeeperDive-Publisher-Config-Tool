@@ -4,19 +4,21 @@
 @import "./styles.css";
 
 /* Component Styles */
-@import "./components/publishers/publishers.css";
-@import "./components/publisher-configuration/publisher-configuration.css";
+/* Component Styles */
+/* Component Styles */
+@import "./features/publishers/pages/publishers/publishers.css";
+@import "./features/publisher-configuration/pages/publisher-configuration/publisher-configuration.css";
 
 /* Form Field & Subcomponents */
-@import "./components/form-field/form-field.css";
-@import "./components/form-field/components/primitive-field/primitive-field.css";
-@import "./components/form-field/components/object-field/object-field.css";
-@import "./components/form-field/components/array-field/array-field.css";
+@import "./features/publisher-configuration/components/form-field/form-field.css";
+@import "./features/publisher-configuration/components/primitive-field/primitive-field.css";
+@import "./features/publisher-configuration/components/object-field/object-field.css";
+@import "./features/publisher-configuration/components/array-field/array-field.css";
 
 /* Other Components */
-@import "./components/add-field/add-field.css";
-@import "./components/snackbar/snackbar.css";
-@import "./components/loader/loader.css";
+@import "./features/publisher-configuration/components/add-field/add-field.css";
+@import "./shared/components/snackbar/snackbar.css";
+@import "./shared/components/loader/loader.css";
 
 /* Modals */
-@import "./modals/compare-configuration/compare-configuration.css";
+@import "./features/compare-configuration/modals/compare-configuration/compare-configuration.css";
