@@ -1,4 +1,4 @@
-import { Loader } from "../components/loader/loader.js";
+import { Loader } from "./components/loader/loader.js";
 import { HttpMethod } from "./enums.js";
 
 /**

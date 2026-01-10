@@ -12,32 +12,16 @@
     <title>DeeperDive Config Tool</title>
     <link rel="icon" href="data:," />
     <!-- Global and Component Stylesheets -->
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./components/publishers/publishers.css" />
-    <link
-      rel="stylesheet"
-      href="./components/publisher-configuration/publisher-configuration.css"
-    />
-    <link rel="stylesheet" href="./components/form-field/form-field.css" />
-    <link
-      rel="stylesheet"
-      href="./components/form-field/components/primitive-field/primitive-field.css"
-    />
-    <link
-      rel="stylesheet"
-      href="./components/form-field/components/object-field/object-field.css"
-    />
-    <link
-      rel="stylesheet"
-      href="./components/form-field/components/array-field/array-field.css"
-    />
-    <link rel="stylesheet" href="./components/add-field/add-field.css" />
-    <link rel="stylesheet" href="./components/snackbar/snackbar.css" />
-    <link rel="stylesheet" href="./components/loader/loader.css" />
-    <link
-      rel="stylesheet"
-      href="./modals/compare-configuration/compare-configuration.css"
-    />
+
+    <!-- dudi 1 - css simplification (done) -->
+    <!-- dudi 2 - snackbar fixes (done) -->
+    <!-- dudi 3 - folder structure (done) -->
+    <!-- dudi 4 - are you sure (done) -->
+    <!-- dudi 5 - expand collapse (done) -->
+    <!-- dudi 6 - searchbar (done) -->
+    <!-- dudi 7 - user guide -->
+    <!-- dudi 8 - check about the importmap (done) -->
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <!-- Application Header containing the logo -->
@@ -57,10 +41,6 @@
   <script type="module" src="../dist/public/index.js"></script>
   <!-- Import Map for bare module specifiers -->
   <script type="importmap">
-    {
-      "imports": {
-        "diff": "https://cdn.jsdelivr.net/npm/diff@5.2.0/+esm"
-      }
-    }
+    { "imports": { "diff": "https://cdn.jsdelivr.net/npm/diff@5.2.0/+esm" } }
   </script>
 </html>

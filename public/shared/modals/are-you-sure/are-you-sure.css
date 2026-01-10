@@ -1,0 +1,91 @@
+.are-you-sure-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.6); /* slate-900 with opacity */
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.are-you-sure-overlay.open {
+  opacity: 1;
+}
+
+.are-you-sure-modal {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-slate-200);
+}
+
+.are-you-sure-overlay.open .are-you-sure-modal {
+  transform: scale(1);
+}
+
+.are-you-sure-modal__header {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin: 0;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.are-you-sure-modal__content {
+  font-size: 1rem;
+  color: var(--color-slate-600);
+  line-height: 1.6;
+}
+
+.are-you-sure-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Remove default styles overridden by base-button but add specific sizing */
+.are-you-sure-modal__btn {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+}
+
+.are-you-sure-modal__btn--cancel {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-300);
+  color: var(--color-slate-700);
+}
+
+.are-you-sure-modal__btn--cancel:hover {
+  background-color: var(--color-slate-50);
+  border-color: var(--color-slate-400);
+  color: var(--color-slate-900);
+}
+
+.are-you-sure-modal__btn--confirm {
+  background-color: var(--color-blue-600);
+  border: 1px solid var(--color-blue-600);
+  color: var(--color-white);
+}
+
+.are-you-sure-modal__btn--confirm:hover {
+  background-color: #1d4ed8; /* darker blue */
+  border-color: #1d4ed8;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+}

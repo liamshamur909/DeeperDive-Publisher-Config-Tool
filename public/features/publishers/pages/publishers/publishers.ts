@@ -1,11 +1,9 @@
-import {
-  navigateToPublisherConfigurations,
-  showToast,
-  api,
-  SnackbarType,
-} from "../../index.js";
-import { Component } from "../../shared/interfaces.js";
-import { createElementWithClasses } from "../../shared/utils.js";
+import { navigateToPublisherConfigurations } from "../../../../index.js";
+import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
+import { api } from "../../../../shared/api-client.js";
+import { SnackbarType } from "../../../../shared/enums.js";
+import { Component } from "../../../../shared/interfaces.js";
+import { createElementWithClasses } from "../../../../shared/utils.js";
 
 /**
  * Represents a Publisher entity fetched from the API.
@@ -29,6 +27,12 @@ export class Publishers implements Component {
 
   /** Static headers for the publishers table. */
   readonly tableHeaders = ["ID", "Alias", "Action"];
+
+  /** All fetched publishers */
+  private publishers: Publisher[] = [];
+
+  /** Publishers currently displayed (filtered) */
+  private filteredPublishers: Publisher[] = [];
 
   /**
    * Creates an instance of the Publishers component.
@@ -58,6 +62,10 @@ export class Publishers implements Component {
    */
   render() {
     this.componentElement.innerHTML = `
+      <div class="publishers-search-container">
+        <input type="text" id="publisher-search-input" placeholder="Search by ID or Alias..." class="base-input search-input" />
+        <button id="publisher-search-button" class="base-button search-button">Search</button>
+      </div>
       <div class="publishers-table" role="table">
         <div class="publishers-table__header" role="row">
           ${this.tableHeaders
@@ -85,7 +93,26 @@ export class Publishers implements Component {
   /**
    * Attaches necessary event listeners.
    */
-  attachEvents() {}
+  attachEvents() {
+    const searchButton = this.componentElement.querySelector(
+      "#publisher-search-button"
+    );
+    const searchInput = this.componentElement.querySelector(
+      "#publisher-search-input"
+    ) as HTMLInputElement;
+
+    if (searchButton && searchInput) {
+      searchButton.addEventListener("click", () =>
+        this.handleSearch(searchInput.value)
+      );
+
+      searchInput.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+          this.handleSearch(searchInput.value);
+        }
+      });
+    }
+  }
 
   /**
    * Removes the component from the DOM.
@@ -98,19 +125,25 @@ export class Publishers implements Component {
    * Fetches data and populates the table body with rows.
    */
   private async loadTableRows() {
-    this.componentElement
-      .querySelectorAll<HTMLElement>(".publishers-table__row")
-      .forEach((row) => row.remove());
+    await this.getPublishers();
 
-    const publishers = await this.getPublishers();
+    this.renderRows(this.filteredPublishers);
+  }
 
+  /**
+   * Renders the rows for the given list of publishers.
+   * @param publishers - The list of publishers to render.
+   */
+  private renderRows(publishers: Publisher[]) {
     const tableBody = document.getElementById("publishers-table-body");
-    if (tableBody) {
-      publishers.forEach((publisher) => {
-        const row = this.createRow(publisher);
-        tableBody.appendChild(row);
-      });
-    }
+    if (!tableBody) return;
+
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    publishers.forEach((publisher) => {
+      const row = this.createRow(publisher);
+      tableBody.appendChild(row);
+    });
   }
 
   /**
@@ -125,10 +158,14 @@ export class Publishers implements Component {
       const publishersArray: Publisher[] = Array.isArray(json.publishers)
         ? json.publishers
         : [];
+
+      this.publishers = publishersArray;
+      this.filteredPublishers = publishersArray;
+
       return publishersArray;
     } catch (error) {
       console.error("Failed to fetch publishers, using fallback data", error);
-      showToast("Failed to fetch publishers", SnackbarType.ERROR);
+      new Snackbar("Failed to fetch publishers", SnackbarType.ERROR);
       return [];
     }
   }
@@ -166,5 +203,29 @@ export class Publishers implements Component {
    */
   private handleToFile(filename: string) {
     navigateToPublisherConfigurations(filename);
+  }
+
+  /**
+   * Filters the publishers list based on the search query and re-renders the table.
+   * @param query - The search string.
+   */
+  private handleSearch(query: string) {
+    const lowerCaseQuery = query.toLowerCase().trim();
+
+    if (!lowerCaseQuery) {
+      this.filteredPublishers = this.publishers;
+    } else {
+      this.filteredPublishers = this.publishers.filter(
+        (p) =>
+          p.id.toLowerCase().includes(lowerCaseQuery) ||
+          p.alias.toLowerCase().includes(lowerCaseQuery)
+      );
+    }
+
+    if (this.filteredPublishers.length === 0) {
+      new Snackbar("No publishers found", SnackbarType.INFO);
+    }
+
+    this.renderRows(this.filteredPublishers);
   }
 }

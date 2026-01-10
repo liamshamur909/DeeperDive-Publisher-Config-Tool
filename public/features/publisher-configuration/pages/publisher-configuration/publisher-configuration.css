@@ -201,3 +201,8 @@
   margin: 0;
   width: 100%;
 }
+
+.optional-fields .add-field {
+  border-top: 2px solid #e0f2fe;
+  padding-top: 16px;
+}

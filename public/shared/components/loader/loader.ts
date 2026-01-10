@@ -1,5 +1,5 @@
-import { Component } from "../../shared/interfaces.js";
-import { createElementWithClasses } from "../../shared/utils.js";
+import { Component } from "../../interfaces.js";
+import { createElementWithClasses } from "../../utils.js";
 
 /**
  * A full-screen loader component that overlays the page content.

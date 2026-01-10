@@ -12,27 +12,24 @@
   --delete-button-hover-border: var(--color-red-300);
   --delete-button-active-bg: var(--color-red-200);
 
-  /* Button: Add */
-  --add-button-bg: var(--color-green-50);
-  --add-button-border: var(--color-green-200);
-  --add-button-text: var(--color-green-600);
-  --add-button-hover-bg: var(--color-green-100);
-  --add-button-hover-border: var(--color-green-300);
-  --add-button-active-bg: var(--color-green-200);
-
-  /* Inputs */
-  --input-bg: var(--color-white);
-  --input-border: var(--color-slate-300);
-  --input-text: var(--color-slate-700);
-  --input-focus-border: var(--color-blue-600);
-  --input-focus-shadow: rgba(59, 130, 246, 0.15);
-  --label-text: var(--color-slate-600);
+  /* Button: Toggle */
+  --toggle-button-bg: var(--color-slate-100);
+  --toggle-button-border: var(--color-slate-300);
+  --toggle-button-text: var(--color-slate-600);
+  --toggle-button-hover-bg: var(--color-slate-200);
+  --toggle-button-hover-border: var(--color-slate-400);
+  --toggle-button-active-bg: var(--color-slate-300);
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  box-sizing: border-box;
+}
+
+.form-field__input {
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -43,8 +40,12 @@
 
 .form-field__header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.form-field__header .delete-button {
+  margin-left: auto;
 }
 
 .form-field__label {
@@ -85,4 +86,58 @@
 /* Align delete button to the right in boolean (checkbox) fields */
 .form-field--checkbox .delete-button {
   margin-left: auto;
+}
+
+/* Collapse/Expand Styles */
+.form-field__content {
+  display: block;
+}
+
+.form-field__content.collapsed {
+  display: none;
+}
+
+.toggle-button {
+  background-color: var(--toggle-button-bg);
+  border: 1px solid var(--toggle-button-border);
+  color: var(--toggle-button-text);
+
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  border-radius: 50%; /* Completely round */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.toggle-button:hover {
+  background-color: var(--toggle-button-hover-bg);
+  border-color: var(--toggle-button-hover-border);
+  color: var(--toggle-button-text);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.toggle-button:active {
+  background-color: var(--toggle-button-active-bg);
+  transform: translateY(0);
+}
+
+.toggle-icon {
+  padding-left: 3px;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.toggle-button.expanded .toggle-icon {
+  transform: rotate(90deg);
 }

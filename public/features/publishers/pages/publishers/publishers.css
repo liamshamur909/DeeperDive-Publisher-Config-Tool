@@ -131,3 +131,39 @@
 .publishers-table__row:nth-child(even) {
   background: var(--row-alt-bg);
 }
+
+.publishers-search-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.search-input {
+  flex: 1;
+  max-width: 300px;
+}
+
+.search-button {
+  min-width: 80px;
+  justify-content: center;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  color: var(--button-text-color);
+}
+
+.search-button:hover {
+  background-color: var(--row-alt-bg);
+  border-color: var(--button-hover-border);
+  box-shadow: var(--button-hover-shadow);
+}
+
+.search-button:active {
+  background-color: var(--table-row-border);
+}
