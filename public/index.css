@@ -18,6 +18,7 @@
 /* Form Field & Subcomponents */
 @import "./features/publisher-configuration/components/form-field/form-field.css";
 @import "./features/publisher-configuration/components/primitive-field/primitive-field.css";
+@import "./features/publisher-configuration/components/boolean-field/boolean-field.css";
 @import "./features/publisher-configuration/components/object-field/object-field.css";
 @import "./features/publisher-configuration/components/array-field/array-field.css";
 

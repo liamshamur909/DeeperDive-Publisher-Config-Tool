@@ -45,11 +45,6 @@
   box-sizing: border-box;
 }
 
-.form-field--checkbox {
-  flex-direction: row;
-  align-items: center;
-}
-
 .form-field__header {
   display: flex;
   justify-content: flex-start;
@@ -93,11 +88,6 @@
 /* Specific override for labels inside headers. Used in ObjectField and FormField removal scenarios. */
 .form-field__header .form-field__label {
   margin-bottom: 0;
-}
-
-/* Align delete button to the right in boolean (checkbox) fields */
-.form-field--checkbox .delete-button {
-  margin-left: auto;
 }
 
 /* Collapse/Expand Styles */

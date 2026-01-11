@@ -1,0 +1,61 @@
+.boolean-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-block: 8px;
+  padding-inline-start: 35px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--text-primary, #333); /* Fallback */
+  user-select: none;
+}
+
+.radio-option input[type="radio"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 1px solid var(--color-slate-400, #94a3b8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.radio-option input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: var(--color-blue-500, #3b82f6);
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: var(--color-blue-500, #3b82f6);
+}
+
+.radio-option input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.radio-option:hover input[type="radio"] {
+  border-color: var(--color-blue-400, #60a5fa);
+}

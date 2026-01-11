@@ -4,14 +4,14 @@
  * Renders a simple input for distinct primitive types:
  * - Strings (text input)
  * - Numbers (number input)
- * - Booleans (checkbox)
+
  * Used as a leaf node in the configuration tree.
  */
 
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 
-type PrimitiveType = string | number | boolean;
+type PrimitiveType = string | number;
 
 /**
  * Component for rendering primitive values (String, Number, Boolean).
@@ -54,23 +54,13 @@ export class PrimitiveField implements Component {
    */
   render() {
     const input = this.componentElement as HTMLInputElement;
-
-    if (typeof this.value === "boolean") {
-      input.type = "checkbox";
-      input.checked = this.value;
-      input.className = "";
-      input.addEventListener("change", (e) => {
-        this.onChange((e.target as HTMLInputElement).checked);
-      });
-    } else {
-      input.className = "form-field__input base-input";
-      input.value = String(this.value);
-      input.type = typeof this.value === "number" ? "number" : "text";
-      input.addEventListener("input", (e) => {
-        const val = (e.target as HTMLInputElement).value;
-        this.onChange(typeof this.value === "number" ? Number(val) : val);
-      });
-    }
+    input.className = "form-field__input base-input";
+    input.value = String(this.value);
+    input.type = typeof this.value === "number" ? "number" : "text";
+    input.addEventListener("input", (e) => {
+      const val = (e.target as HTMLInputElement).value;
+      this.onChange(typeof this.value === "number" ? Number(val) : val);
+    });
   }
 
   /**
