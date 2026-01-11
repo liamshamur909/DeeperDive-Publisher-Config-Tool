@@ -10,19 +10,20 @@
 :root {
   /* Component color variables */
   --card-bg: var(--color-white); /* cards / row background */
-  --card-border: #e6eef8; /* subtle card border */
+  --card-border: var(--color-slate-200); /* approximated #e6eef8 */
   --table-header-bg: var(--color-slate-50); /* header background */
   --table-body-bg: var(--color-slate-50); /* body background */
-  --table-row-border: #eef2f7; /* row dividers */
-  --row-alt-bg: #fbfdff; /* alternate row background */
+  --table-row-border: var(--color-slate-100); /* approximated #eef2f7 */
+  --row-alt-bg: var(--color-slate-50); /* approximated #fbfdff */
   --shadow: var(--shadow-default);
   --header-text-color: var(--color-slate-500);
   --cell-text-color: var(--color-slate-700);
   --button-text-color: var(--color-slate-600);
   --button-hover-border: var(--color-slate-300);
-  --button-hover-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --button-hover-shadow: var(--shadow-hover-sm);
 
   /* Component px variables */
+  --shadow-hover-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
   --row-height: 40px;
 }
 
