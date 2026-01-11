@@ -1,3 +1,10 @@
+/*
+ * Confirmation Modal Styles
+ * 
+ * Styling for the modal dialog and overlay.
+ * Uses a scale transition for entrance animation.
+ */
+
 .are-you-sure-overlay {
   position: fixed;
   top: 0;

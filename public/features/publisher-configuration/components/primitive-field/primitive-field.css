@@ -1,3 +1,9 @@
+/*
+ * Primitive Field Styles
+ * 
+ * Styling for leaf-node inputs.
+ */
+
 .primitive-field__input {
   width: 100%;
   box-sizing: border-box;

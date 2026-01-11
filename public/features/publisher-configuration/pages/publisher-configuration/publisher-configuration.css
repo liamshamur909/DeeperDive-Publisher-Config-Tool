@@ -1,3 +1,12 @@
+/*
+ * Publisher Configuration Styles
+ * 
+ * Styling for the editor layout, including:
+ * - Control bar (buttons).
+ * - Split view (Form vs JSON).
+ * - Component-specific color variables.
+ */
+
 :root {
   /* Layout Colors */
 

@@ -1,3 +1,9 @@
+/*
+ * Add Field Styles
+ * 
+ * Layout for the "Add Field" input group (Input + Select + Button).
+ */
+
 .add-field {
   display: flex;
   gap: 10px;

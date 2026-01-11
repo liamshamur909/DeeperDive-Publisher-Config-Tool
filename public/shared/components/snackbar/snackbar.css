@@ -1,3 +1,12 @@
+/*
+ * Snackbar Styles
+ * 
+ * Styling for toast notifications, including:
+ * - Positioning (bottom-center).
+ * - Entrance/Exit animations.
+ * - Color variants corresponding to message types.
+ */
+
 /* Snackbar Container - fixed at the bottom center */
 #snackbar-container {
   position: fixed;

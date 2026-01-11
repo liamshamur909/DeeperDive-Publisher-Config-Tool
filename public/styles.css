@@ -1,8 +1,20 @@
-/* Global Stylesheet */
+/*
+ * Global Stylesheet
+ *
+ * This file contains:
+ * 1. Global font imports.
+ * 2. CSS Custom Properties (Variables) for theming, spacing, and colors.
+ * 3. Base element resets and shared utility classes.
+ */
+
 /* Imports the Heebo font from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap");
 
 :root {
+  /* ==========================================================================
+     Theme & Layout Variables
+     ========================================================================== */
+
   /* Base Background */
   --bg: #f6f9ff;
 
@@ -22,6 +34,10 @@
   --main-bg-gradient: linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);
   --logo-drop-shadow: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 
+  /* ==========================================================================
+     Component Variables
+     ========================================================================== */
+
   /* Shared Input Variables - if not defined in component, fallbacks here or use values */
   --input-bg: #ffffff;
   --input-border: #cbd5e1;
@@ -29,8 +45,14 @@
   --input-focus-border: #3b82f6;
   --input-focus-shadow: rgba(59, 130, 246, 0.15);
 
-  /* Global Color Palette for Buttons & UI */
+  /* ==========================================================================
+     Color Palette
+     ========================================================================== */
+
+  /* Shared Base Colors */
   --color-white: #ffffff;
+
+  /* Slate Scale (Greys/Neutrals) */
   --color-slate-50: #f8fafc;
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
@@ -41,24 +63,28 @@
   --color-slate-700: #334155;
   --color-slate-900: #0f172a;
 
+  /* Emerald Scale (Success/Green) */
   --color-emerald-50: #ecfdf5;
   --color-emerald-100: #d1fae5;
   --color-emerald-200: #a7f3d0;
   --color-emerald-300: #6ee7b7;
   --color-emerald-600: #059669;
 
+  /* Blue Scale (Primary/Action) */
   --color-blue-50: #eff6ff;
   --color-blue-100: #dbeafe;
   --color-blue-200: #bfdbfe;
   --color-blue-300: #93c5fd;
   --color-blue-600: #2563eb;
 
+  /* Red Scale (Danger/Error) */
   --color-red-50: #fef2f2;
   --color-red-100: #fee2e2;
   --color-red-200: #fecaca;
   --color-red-300: #fca5a5;
   --color-red-500: #ef4444;
 
+  /* Green Scale (Alternative Success) */
   --color-green-50: #f0fdf4;
   --color-green-100: #dcfce7;
   --color-green-200: #bbf7d0;

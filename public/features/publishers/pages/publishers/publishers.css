@@ -1,3 +1,12 @@
+/*
+ * Publishers List Styles
+ * 
+ * Styles for the Publishers component, including:
+ * - Search bar layout.
+ * - Table layout (flexbox-based) and responsiveness.
+ * - Row styling and hover effects.
+ */
+
 :root {
   /* Component color variables */
   --card-bg: var(--color-white); /* cards / row background */

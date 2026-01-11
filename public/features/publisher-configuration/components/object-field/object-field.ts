@@ -1,3 +1,13 @@
+/**
+ * Object Field Component
+ *
+ * Renders nested object structures directly.
+ * Features:
+ * - Iterates over object keys to render fields.
+ * - Supports adding new properties (if structure is not fixed).
+ * - Supports removing properties.
+ */
+
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";

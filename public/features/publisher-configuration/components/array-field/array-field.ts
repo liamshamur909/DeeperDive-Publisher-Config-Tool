@@ -1,3 +1,13 @@
+/**
+ * Array Field Component
+ *
+ * Manages the display and editing of array structures.
+ * Features:
+ * - Renders a list of items (nested objects or primitives).
+ * - Allows adding new items (inferring structure from existing items if possible).
+ * - Allows removing items.
+ */
+
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";

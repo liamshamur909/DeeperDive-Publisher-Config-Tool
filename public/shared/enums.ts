@@ -1,4 +1,10 @@
 /**
+ * Shared Enumerations
+ *
+ * Defines global enum constants used across the client-side application.
+ */
+
+/**
  * Supported field types for the configuration form.
  */
 export enum FieldType {

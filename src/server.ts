@@ -1,3 +1,12 @@
+/**
+ * Express Server implementation for the DeeperDive Publisher Config Tool.
+ *
+ * This server handles:
+ * - Serving static assets (HTML, CSS, JS).
+ * - Providing a REST API for reading and writing publisher configurations.
+ * - Managing configuration version history.
+ */
+
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -10,22 +19,29 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Directory configuration
 const DATA_DIR = path.join(__dirname, "../data");
 const HISTORY_DIR = path.join(DATA_DIR, "history");
 
-// Serve static files from public directory
+// Middleware: Serve static files from public directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Serve static files from dist directory
+// Middleware: Serve static files from dist directory (compiled JS)
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
 
-// Serve static files from assets directory
+// Middleware: Serve static files from assets directory (images, etc.)
 app.use("/assets", express.static(path.join(__dirname, "../assets")));
 
-// Parse JSON bodies
+// Middleware: Parse JSON bodies for API requests
 app.use(express.json());
 
-// Scan for new files and initialize history
+/**
+ * Scans the data directory for new configuration files and initializes their history.
+ *
+ * If a new publisher JSON file is found in 'data/' but has no corresponding
+ * history folder in 'data/history/', this function creates the history folder
+ * and saves the current content as 'v1.json'.
+ */
 const initializeHistory = async () => {
   try {
     if (!existsSync(HISTORY_DIR)) {
@@ -68,7 +84,12 @@ const initializeHistory = async () => {
   }
 };
 
-// API endpoint to get publishers list
+/**
+ * GET /api/publishers
+ * Retrieves the list of all publishers.
+ *
+ * @returns {Array} List of publisher objects.
+ */
 app.get("/api/publishers", async (_req, res) => {
   try {
     const dataPath = path.join(DATA_DIR, "publishers.json");
@@ -79,7 +100,13 @@ app.get("/api/publishers", async (_req, res) => {
   }
 });
 
-// API endpoint to get a specific publisher config
+/**
+ * GET /api/publisher/:filename
+ * Retrieves a specific publisher configuration by filename.
+ *
+ * @param {string} filename - The name of the file (e.g., 'publisher-aurora.json').
+ * @returns {Object} The publisher configuration object.
+ */
 app.get("/api/publisher/:filename", async (req, res) => {
   try {
     const { filename } = req.params;
@@ -91,7 +118,14 @@ app.get("/api/publisher/:filename", async (req, res) => {
   }
 });
 
-// API endpoint to save a publisher config
+/**
+ * PUT /api/publisher/:filename
+ * Updates a specific publisher configuration and saves a new history version.
+ *
+ * @param {string} filename - The name of the file to update.
+ * @body {Object} The new configuration content.
+ * @returns {Object} Success status and the new version number.
+ */
 app.put("/api/publisher/:filename", async (req, res) => {
   try {
     const { filename } = req.params;
@@ -132,7 +166,13 @@ app.put("/api/publisher/:filename", async (req, res) => {
   }
 });
 
-// API endpoint to get versions list
+/**
+ * GET /api/publisher/:filename/versions
+ * Retrieves simple list of available versions for a publisher.
+ *
+ * @param {string} filename - The publisher filename.
+ * @returns {Array<number>} List of version numbers (descending).
+ */
 app.get("/api/publisher/:filename/versions", async (req, res) => {
   try {
     const { filename } = req.params;
@@ -156,7 +196,14 @@ app.get("/api/publisher/:filename/versions", async (req, res) => {
   }
 });
 
-// API endpoint to get a specific version
+/**
+ * GET /api/publisher/:filename/versions/:version
+ * Retrieves the content of a specific version.
+ *
+ * @param {string} filename - The publisher filename.
+ * @param {string} version - The version number.
+ * @returns {Object} The configuration content for that version.
+ */
 app.get("/api/publisher/:filename/versions/:version", async (req, res) => {
   try {
     const { filename, version } = req.params;
@@ -179,7 +226,7 @@ app.get("/api/publisher/:filename/versions/:version", async (req, res) => {
   }
 });
 
-// Run migration before starting server
+// Run migration/initialization before starting server
 await initializeHistory();
 
 app.listen(PORT, () => {

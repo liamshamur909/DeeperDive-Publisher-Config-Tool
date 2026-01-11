@@ -1,3 +1,13 @@
+/**
+ * Snackbar Component
+ *
+ * Displays temporary toast notifications for user feedback (success, error, info).
+ * Features:
+ * - Specific styling variants for different message types.
+ * - Auto-dismiss functionality.
+ * - Mounts to a global container.
+ */
+
 import { Component } from "../../interfaces.js";
 import { createElementWithClasses } from "../../utils.js";
 import { SnackbarType } from "../../enums.js";

@@ -1,3 +1,10 @@
+/**
+ * Loader Component
+ *
+ * A full-screen overlay with a spinner animation.
+ * Used to block user interaction and indicate background activity during API requests.
+ */
+
 import { Component } from "../../interfaces.js";
 import { createElementWithClasses } from "../../utils.js";
 
@@ -21,7 +28,7 @@ export class Loader implements Component {
   constructor(rootElement: HTMLElement) {
     this.rootElement = rootElement;
 
-    let existingLoader = document.getElementById("loader-overlay");
+    const existingLoader = document.getElementById("loader-overlay");
     if (existingLoader) {
       this.componentElement = existingLoader as HTMLElement;
     } else {

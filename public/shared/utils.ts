@@ -1,4 +1,10 @@
 /**
+ * Shared Utilities
+ *
+ * General helper functions used throughout the application.
+ */
+
+/**
  * Creates an HTML element with one or more class names.
  *
  * @param elementName - The tag name of the element to create (e.g., 'div', 'span').

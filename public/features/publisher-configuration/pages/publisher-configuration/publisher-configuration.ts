@@ -1,3 +1,14 @@
+/**
+ * Publisher Configuration Editor
+ *
+ * This component provides the main interface for editing a specific publisher's configuration.
+ * Features:
+ * - Loads existing configuration from the API.
+ * - dynamically generates a form based on the configuration structure.
+ * - Handles saving, change detection, and JSON export.
+ * - Integrates with the Comparison tool to show version diffs.
+ */
+
 import { navigateToPublishers } from "../../../../index.js";
 import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
 import { api } from "../../../../shared/api-client.js";

@@ -1,4 +1,10 @@
 /**
+ * Shared Interfaces
+ *
+ * Defines global TypeScript interfaces and types, including the core `Component` contract.
+ */
+
+/**
  * Represents a UI component in the application.
  * All components should implement this interface to ensure a consistent lifecycle.
  */

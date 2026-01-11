@@ -1,3 +1,10 @@
+/*
+ * Loader Styles
+ * 
+ * - Full-screen backdrop with blur effect.
+ * - CSS-only spinner animation.
+ */
+
 /* Full-screen overlay */
 #loader-overlay {
   position: fixed;

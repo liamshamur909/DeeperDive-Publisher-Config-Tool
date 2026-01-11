@@ -1,3 +1,13 @@
+/**
+ * Publishers List Component
+ *
+ * This component handles the display and interaction of the Publishers list.
+ * Features:
+ * - Fetches and displays a list of publishers.
+ * - Provides search/filtering functionality.
+ * - Navigates to the configuration editor for a selected publisher.
+ */
+
 import { navigateToPublisherConfigurations } from "../../../../index.js";
 import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";
 import { api } from "../../../../shared/api-client.js";

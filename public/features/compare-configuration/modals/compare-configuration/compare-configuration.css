@@ -1,3 +1,12 @@
+/*
+ * Comparison Modal Styles
+ * 
+ * Styling for the version comparison modal, including:
+ * - Overlay and modal container.
+ * - Header with version selector.
+ * - Diff view (GitHub-style red/green diffs).
+ */
+
 /* Modal Overlay */
 .compare-modal-overlay {
   position: fixed;

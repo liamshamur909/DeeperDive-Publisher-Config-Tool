@@ -1,3 +1,13 @@
+/*
+ * Form Field Styles
+ * 
+ * Styles for the generic field wrapper, including:
+ * - Label styling.
+ * - Toggle button (collapsible sections).
+ * - Delete button.
+ * - Layout for nested content.
+ */
+
 :root {
   /* Structure Colors */
   --nested-border: var(--color-slate-200);

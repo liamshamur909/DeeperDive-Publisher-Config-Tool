@@ -1,3 +1,13 @@
+/**
+ * API Client
+ *
+ * A centralized wrapper for making HTTP requests to the backend.
+ * Features:
+ * - Automatically handles loading states (visual spinner).
+ * - Standardizes error handling and response formatting.
+ * - Provides convenience methods for GET, POST, PUT, DELETE.
+ */
+
 import { Loader } from "./components/loader/loader.js";
 import { HttpMethod } from "./enums.js";
 
