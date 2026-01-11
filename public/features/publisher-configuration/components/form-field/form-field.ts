@@ -11,10 +11,11 @@ import { createElementWithClasses } from "../../../../shared/utils.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";
 import { ObjectField } from "../object-field/object-field.js";
 import { ArrayField } from "../array-field/array-field.js";
+import { BooleanField } from "../boolean-field/boolean-field.js";
 
 /**
  * Component responsible for rendering a single form field.
- * Acts as a controller that delegates rendering to PrimitiveField, ArrayField, or ObjectField
+ * Acts as a controller that delegates rendering to PrimitiveField, BooleanField, ArrayField, or ObjectField
  * based on the data type of the field value.
  */
 export class FormField implements Component {
@@ -83,64 +84,7 @@ export class FormField implements Component {
     const value = this.parentData[this.key];
     const fieldType = this.getFieldType(value);
 
-    switch (fieldType) {
-      case "boolean":
-        this.renderBoolean(value);
-        break;
-      default:
-        this.renderNonBoolean(
-          value,
-          fieldType as "array" | "object" | "primitive"
-        );
-        break;
-    }
-  }
-
-  /**
-   * Determines the type of the field based on its value.
-   * @param value - The value to check.
-   * @returns The type of the field ('boolean', 'array', 'object', or 'primitive').
-   */
-  private getFieldType(
-    value: any
-  ): "boolean" | "array" | "object" | "primitive" {
-    if (typeof value === "boolean") return "boolean";
-    if (Array.isArray(value)) return "array";
-    if (typeof value === "object" && value !== null) return "object";
-    return "primitive";
-  }
-
-  /**
-   * Renders a boolean field (checkbox).
-   * @param value - The boolean value.
-   */
-  private renderBoolean(value: boolean) {
-    this.componentElement.classList.add("form-field--checkbox");
-
-    new PrimitiveField(this.componentElement, value, (newVal) => {
-      this.parentData[this.key] = newVal;
-      this.onChange();
-    });
-
-    this.componentElement.appendChild(this.createLabel(true));
-
-    if (this.onRemove) {
-      const removeButton = this.createRemoveButton();
-      this.componentElement.appendChild(removeButton);
-    }
-  }
-
-  /**
-   * Renders non-boolean fields (Array, Object, or Primitive).
-   * @param value - The field value.
-   * @param fieldType - The determined type of the field.
-   */
-  private renderNonBoolean(
-    value: any,
-    fieldType: "array" | "object" | "primitive"
-  ) {
-    // For non-boolean fields, we use a collapsible structure
-    this.componentElement.appendChild(this.createLabel(false, true));
+    this.componentElement.appendChild(this.createLabel());
 
     const contentContainer = createElementWithClasses("div", [
       "form-field__content",
@@ -152,6 +96,12 @@ export class FormField implements Component {
     this.componentElement.appendChild(contentContainer);
 
     switch (fieldType) {
+      case "boolean":
+        new BooleanField(contentContainer, value, (newVal) => {
+          this.parentData[this.key] = newVal;
+          this.onChange();
+        });
+        break;
       case "array":
         new ArrayField(contentContainer, value, this.onChange);
         break;
@@ -170,6 +120,20 @@ export class FormField implements Component {
         });
         break;
     }
+  }
+
+  /**
+   * Determines the type of the field based on its value.
+   * @param value - The value to check.
+   * @returns The type of the field ('boolean', 'array', 'object', or 'primitive').
+   */
+  private getFieldType(
+    value: any
+  ): "boolean" | "array" | "object" | "primitive" {
+    if (typeof value === "boolean") return "boolean";
+    if (Array.isArray(value)) return "array";
+    if (typeof value === "object" && value !== null) return "object";
+    return "primitive";
   }
 
   /**
@@ -193,31 +157,19 @@ export class FormField implements Component {
 
   /**
    * Creates the label element, optionally wrapped in a header with a remove button and toggle button.
-   * @param isCheckbox - Whether this label is for a checkbox input (affects styling).
-   * @param isCollapsible - Whether the field supports collapsing (adds toggle button).
    * @returns The label element (or header wrapper).
    */
-  private createLabel(
-    isCheckbox: boolean = false,
-    isCollapsible: boolean = false
-  ): HTMLElement {
+  private createLabel(): HTMLElement {
     const label = document.createElement("label");
     label.textContent = String(this.key);
-
-    if (isCheckbox) {
-      label.classList.add("form-field-checkbox-label");
-      return label;
-    }
 
     label.classList.add("form-field__label");
 
     // For collapsible fields or fields with remove button, we use a header
     const header = createElementWithClasses("div", ["form-field__header"]);
 
-    if (isCollapsible) {
-      const toggleBtn = this.createToggleButton();
-      header.appendChild(toggleBtn);
-    }
+    const toggleBtn = this.createToggleButton();
+    header.appendChild(toggleBtn);
 
     header.appendChild(label);
 

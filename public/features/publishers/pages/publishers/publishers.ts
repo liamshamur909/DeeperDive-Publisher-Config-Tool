@@ -74,7 +74,6 @@ export class Publishers implements Component {
     this.componentElement.innerHTML = `
       <div class="publishers-search-container">
         <input type="text" id="publisher-search-input" placeholder="Search by ID or Alias..." class="base-input search-input" />
-        <button id="publisher-search-button" class="base-button search-button">Search</button>
       </div>
       <div class="publishers-table" role="table">
         <div class="publishers-table__header" role="row">
@@ -104,22 +103,13 @@ export class Publishers implements Component {
    * Attaches necessary event listeners.
    */
   attachEvents() {
-    const searchButton = this.componentElement.querySelector(
-      "#publisher-search-button"
-    );
     const searchInput = this.componentElement.querySelector(
       "#publisher-search-input"
     ) as HTMLInputElement;
 
-    if (searchButton && searchInput) {
-      searchButton.addEventListener("click", () =>
-        this.handleSearch(searchInput.value)
-      );
-
-      searchInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") {
-          this.handleSearch(searchInput.value);
-        }
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        this.handleSearch(searchInput.value);
       });
     }
   }
@@ -230,10 +220,6 @@ export class Publishers implements Component {
           p.id.toLowerCase().includes(lowerCaseQuery) ||
           p.alias.toLowerCase().includes(lowerCaseQuery)
       );
-    }
-
-    if (this.filteredPublishers.length === 0) {
-      new Snackbar("No publishers found", SnackbarType.INFO);
     }
 
     this.renderRows(this.filteredPublishers);

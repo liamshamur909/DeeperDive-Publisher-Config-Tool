@@ -158,22 +158,3 @@
   flex: 1;
   max-width: 300px;
 }
-
-.search-button {
-  min-width: 80px;
-  justify-content: center;
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--shadow);
-  color: var(--button-text-color);
-}
-
-.search-button:hover {
-  background-color: var(--row-alt-bg);
-  border-color: var(--button-hover-border);
-  box-shadow: var(--button-hover-shadow);
-}
-
-.search-button:active {
-  background-color: var(--table-row-border);
-}
