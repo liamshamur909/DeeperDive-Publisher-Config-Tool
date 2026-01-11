@@ -1,3 +1,13 @@
+/**
+ * Configuration Comparison Modal
+ *
+ * A modal component that allows comparing two configuration versions side-by-side (diff view).
+ * Features:
+ * - Fetches available versions for the current file.
+ * - Allows selecting a version to compare against the current edit or saved state.
+ * - Uses the 'diff' library to generate a line-by-line comparison with syntax highlighting.
+ */
+
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 import { diffLines, Change } from "diff";

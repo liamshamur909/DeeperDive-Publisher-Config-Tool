@@ -1,3 +1,10 @@
+/*
+ * Object Field Styles
+ * 
+ * Layout for nested object groups.
+ * Uses a left border and padding to visually nest content.
+ */
+
 .nested-group {
   display: flex;
   flex-direction: column;

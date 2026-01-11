@@ -1,3 +1,9 @@
+/*
+ * Add Field Styles
+ * 
+ * Layout for the "Add Field" input group (Input + Select + Button).
+ */
+
 .add-field {
   display: flex;
   gap: 10px;
@@ -18,7 +24,7 @@
 .add-field__button:hover {
   background-color: var(--download-button-hover-bg);
   border-color: var(--download-button-hover-border);
-  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); /* Specific shadow color override */
+  box-shadow: var(--shadow-hover-blue); /* Specific shadow color override */
 }
 
 .add-field__button:active {

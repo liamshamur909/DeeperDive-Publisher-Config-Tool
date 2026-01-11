@@ -1,3 +1,10 @@
+/*
+ * Loader Styles
+ * 
+ * - Full-screen backdrop with blur effect.
+ * - CSS-only spinner animation.
+ */
+
 /* Full-screen overlay */
 #loader-overlay {
   position: fixed;
@@ -5,7 +12,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  background-color: var(--overlay-bg-darker); /* Darker overlay */
   backdrop-filter: blur(4px);
   z-index: 10000;
   display: flex;
@@ -21,7 +28,7 @@
   width: 50px;
   height: 50px;
   border: 4px solid rgba(255, 255, 255, 0.1);
-  border-left-color: var(--color-blue-500, #3b82f6);
+  border-left-color: var(--color-blue-600);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

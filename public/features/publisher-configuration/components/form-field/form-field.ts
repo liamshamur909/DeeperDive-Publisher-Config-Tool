@@ -1,3 +1,11 @@
+/**
+ * Form Field Component
+ *
+ * A controller component that manages the rendering of a single field in the configuration form.
+ * It determines the type of the value (boolean, array, object, primitive) and renders the
+ * appropriate sub-component. It also handles field removal and collapsing.
+ */
+
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 import { PrimitiveField } from "../primitive-field/primitive-field.js";

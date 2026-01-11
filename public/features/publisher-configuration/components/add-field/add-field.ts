@@ -1,3 +1,13 @@
+/**
+ * Add Field Component
+ *
+ * Provides a UI for adding new optional fields to a configuration object.
+ * Features:
+ * - Text input for the new field key.
+ * - Dropdown for selecting value type (unless fixed).
+ * - Validation to prevent empty keys or duplicates (handled by parent callback).
+ */
+
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 import { Snackbar } from "../../../../shared/components/snackbar/snackbar.js";

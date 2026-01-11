@@ -1,6 +1,11 @@
 /**
- * Entry point for the DeeperDive Publisher Config Tool.
- * Handles the main application routing and initialization.
+ * Application Entry Point
+ *
+ * This file is the main entry point for the client-side application.
+ * It is responsible for:
+ * 1. Initializing the application state.
+ * 2. Handling global routing (navigation between views).
+ * 3. Mounting the appropriate page components into the DOM.
  */
 
 import { Publishers } from "./features/publishers/pages/publishers/publishers.js";

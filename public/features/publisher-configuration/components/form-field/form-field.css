@@ -1,3 +1,13 @@
+/*
+ * Form Field Styles
+ * 
+ * Styles for the generic field wrapper, including:
+ * - Label styling.
+ * - Toggle button (collapsible sections).
+ * - Delete button.
+ * - Layout for nested content.
+ */
+
 :root {
   /* Structure Colors */
   --nested-border: var(--color-slate-200);
@@ -19,6 +29,8 @@
   --toggle-button-hover-bg: var(--color-slate-200);
   --toggle-button-hover-border: var(--color-slate-400);
   --toggle-button-active-bg: var(--color-slate-300);
+
+  --shadow-hover-red: 0 4px 6px rgba(239, 68, 68, 0.1);
 }
 
 .form-field {
@@ -71,7 +83,7 @@
 .delete-button:hover {
   background-color: var(--delete-button-hover-bg);
   border-color: var(--delete-button-hover-border);
-  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.1);
+  box-shadow: var(--shadow-hover-red);
 }
 
 .delete-button:active {

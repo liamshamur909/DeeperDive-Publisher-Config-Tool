@@ -1,26 +1,50 @@
-/* Global Stylesheet */
+/*
+ * Global Stylesheet
+ *
+ * This file contains:
+ * 1. Global font imports.
+ * 2. CSS Custom Properties (Variables) for theming, spacing, and colors.
+ * 3. Base element resets and shared utility classes.
+ */
+
 /* Imports the Heebo font from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap");
 
 :root {
+  /* ==========================================================================
+     Theme & Layout Variables
+     ========================================================================== */
+
   /* Base Background */
   --bg: #f6f9ff;
 
   /* Header Theme */
-  --header-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-  --header-color: #ffffff;
+  --header-bg: linear-gradient(
+    135deg,
+    var(--color-blue-900) 0%,
+    var(--color-blue-500) 100%
+  );
+  --header-color: var(--color-white);
   --header-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --header-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
   /* Footer Theme */
-  --footer-bg: linear-gradient(to right, #0f172a, #1e293b);
-  --footer-color: #94a3b8;
+  --footer-bg: linear-gradient(
+    to right,
+    var(--color-slate-900),
+    var(--color-slate-800)
+  );
+  --footer-color: var(--color-slate-400);
   --footer-border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   /* Main Content Theme */
   --main-bg-gradient: linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);
   --logo-drop-shadow: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+  /* ==========================================================================
+     Component Variables
+     ========================================================================== */
 
   /* Shared Input Variables - if not defined in component, fallbacks here or use values */
   --input-bg: #ffffff;
@@ -29,8 +53,14 @@
   --input-focus-border: #3b82f6;
   --input-focus-shadow: rgba(59, 130, 246, 0.15);
 
-  /* Global Color Palette for Buttons & UI */
+  /* ==========================================================================
+     Color Palette
+     ========================================================================== */
+
+  /* Shared Base Colors */
   --color-white: #ffffff;
+
+  /* Slate Scale (Greys/Neutrals) */
   --color-slate-50: #f8fafc;
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
@@ -39,31 +69,55 @@
   --color-slate-500: #64748b;
   --color-slate-600: #475569;
   --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
   --color-slate-900: #0f172a;
 
-  --color-emerald-50: #ecfdf5;
-  --color-emerald-100: #d1fae5;
-  --color-emerald-200: #a7f3d0;
-  --color-emerald-300: #6ee7b7;
-  --color-emerald-600: #059669;
-
+  /* Blue Scale (Primary/Action) */
   --color-blue-50: #eff6ff;
   --color-blue-100: #dbeafe;
   --color-blue-200: #bfdbfe;
   --color-blue-300: #93c5fd;
+  --color-blue-500: #3b82f6;
   --color-blue-600: #2563eb;
+  --color-blue-900: #1e3a8a;
+  --color-blue-700: #1d4ed8;
 
+  /* Red Scale (Danger/Error) */
   --color-red-50: #fef2f2;
   --color-red-100: #fee2e2;
   --color-red-200: #fecaca;
   --color-red-300: #fca5a5;
   --color-red-500: #ef4444;
 
+  /* Green Scale (Alternative Success) */
   --color-green-50: #f0fdf4;
   --color-green-100: #dcfce7;
   --color-green-200: #bbf7d0;
   --color-green-300: #86efac;
   --color-green-600: #16a34a;
+
+  /* Backgrounds & Gradients */
+  --header-bg: linear-gradient(
+    135deg,
+    var(--color-blue-900) 0%,
+    var(--color-blue-500) 100%
+  );
+  --footer-bg: linear-gradient(
+    to right,
+    var(--color-slate-900),
+    var(--color-slate-800)
+  );
+
+  .base-input:hover {
+    border-color: var(--color-slate-400);
+  }
+
+  /* Overlays */
+  --overlay-bg: rgba(15, 23, 42, 0.6); /* Slate-900 with opacity */
+  --overlay-bg-darker: rgba(15, 23, 42, 0.8);
+
+  /* Shadows */
+  --shadow-hover-blue: 0 4px 6px rgba(37, 99, 235, 0.1);
 }
 
 html,
@@ -162,7 +216,7 @@ body {
 }
 
 .base-input:hover {
-  border-color: #94a3b8;
+  border-color: var(--color-slate-400);
 }
 
 .base-input:focus {

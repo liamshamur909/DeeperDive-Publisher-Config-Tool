@@ -1,3 +1,13 @@
+/**
+ * Confirmation Modal
+ *
+ * A reusable modal dialog for confirming destructive actions or unsaved changes.
+ * Features:
+ * - Custom title and message.
+ * - Confirm and Cancel callbacks.
+ * - Backdrop click to close.
+ */
+
 import { Component } from "../../interfaces.js";
 import { createElementWithClasses } from "../../utils.js";
 

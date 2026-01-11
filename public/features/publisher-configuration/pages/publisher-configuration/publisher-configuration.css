@@ -1,9 +1,18 @@
+/*
+ * Publisher Configuration Styles
+ * 
+ * Styling for the editor layout, including:
+ * - Control bar (buttons).
+ * - Split view (Form vs JSON).
+ * - Component-specific color variables.
+ */
+
 :root {
   /* Layout Colors */
 
-  --json-bg: #f4f4f4;
+  --json-bg: var(--color-slate-50); /* approximated #f4f4f4 to standard theme */
   --form-bg: var(--color-white);
-  --form-border: #cccccc;
+  --form-border: var(--color-slate-300); /* approximated #cccccc */
 
   /* Button: Back */
   --back-button-bg: var(--color-white);
@@ -15,12 +24,12 @@
   --back-button-active-bg: var(--color-slate-100);
 
   /* Button: Save */
-  --save-button-bg: var(--color-emerald-50);
-  --save-button-text: var(--color-emerald-600);
-  --save-button-border: var(--color-emerald-200);
-  --save-button-hover-bg: var(--color-emerald-100);
-  --save-button-hover-border: var(--color-emerald-300);
-  --save-button-active-bg: var(--color-emerald-200);
+  --save-button-bg: var(--color-green-50);
+  --save-button-text: var(--color-green-600);
+  --save-button-border: var(--color-green-200);
+  --save-button-hover-bg: var(--color-green-100);
+  --save-button-hover-border: var(--color-green-300);
+  --save-button-active-bg: var(--color-green-200);
 
   /* Button: Download */
   --download-button-bg: var(--color-blue-50);
@@ -30,12 +39,22 @@
   --download-button-hover-border: var(--color-blue-300);
   --download-button-active-bg: var(--color-blue-200);
   /* Button: Compare */
-  --compare-button-bg: #f3e8ff; /* purple-50 */
-  --compare-button-text: #7e22ce; /* purple-700 */
-  --compare-button-border: #d8b4fe; /* purple-200 */
-  --compare-button-hover-bg: #e9d5ff; /* purple-100 */
-  --compare-button-hover-border: #c084fc; /* purple-300 */
-  --compare-button-active-bg: #d8b4fe; /* purple-200 */
+  --color-purple-50: #f3e8ff;
+  --color-purple-100: #e9d5ff;
+  --color-purple-200: #d8b4fe;
+  --color-purple-300: #c084fc;
+  --color-purple-700: #7e22ce;
+
+  --compare-button-bg: var(--color-purple-50);
+  --compare-button-text: var(--color-purple-700);
+  --compare-button-border: var(--color-purple-200);
+  --compare-button-hover-bg: var(--color-purple-100);
+  --compare-button-hover-border: var(--color-purple-300);
+  --compare-button-active-bg: var(--color-purple-200);
+
+  /* Shadows */
+  --shadow-hover-purple: 0 4px 6px rgba(126, 34, 206, 0.1);
+  --shadow-hover-green: 0 4px 6px rgba(16, 185, 129, 0.1);
 }
 
 .publisher-config-component {
@@ -83,7 +102,7 @@
 .save-button:hover {
   background-color: var(--save-button-hover-bg);
   border-color: var(--save-button-hover-border);
-  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.1); /* Specific shadow color override */
+  box-shadow: var(--shadow-hover-green); /* Specific shadow color override */
 }
 
 .save-button:active {
@@ -99,7 +118,7 @@
 .compare-button:hover {
   background-color: var(--compare-button-hover-bg);
   border-color: var(--compare-button-hover-border);
-  box-shadow: 0 4px 6px rgba(126, 34, 206, 0.1);
+  box-shadow: var(--shadow-hover-purple);
 }
 
 .compare-button:active {
@@ -115,7 +134,7 @@
 .download-button:hover {
   background-color: var(--download-button-hover-bg);
   border-color: var(--download-button-hover-border);
-  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1); /* Specific shadow color override */
+  box-shadow: var(--shadow-hover-blue); /* Specific shadow color override */
 }
 
 .download-button:active {
@@ -153,7 +172,7 @@
   align-items: center;
   gap: 25px;
   background-color: var(--form-bg);
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-slate-200);
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),

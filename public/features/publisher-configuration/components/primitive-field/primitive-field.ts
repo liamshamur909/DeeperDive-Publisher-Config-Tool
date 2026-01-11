@@ -1,3 +1,13 @@
+/**
+ * Primitive Field Component
+ *
+ * Renders a simple input for distinct primitive types:
+ * - Strings (text input)
+ * - Numbers (number input)
+ * - Booleans (checkbox)
+ * Used as a leaf node in the configuration tree.
+ */
+
 import { Component } from "../../../../shared/interfaces.js";
 import { createElementWithClasses } from "../../../../shared/utils.js";
 

@@ -1,3 +1,12 @@
+/*
+ * Snackbar Styles
+ * 
+ * Styling for toast notifications, including:
+ * - Positioning (bottom-center).
+ * - Entrance/Exit animations.
+ * - Color variants corresponding to message types.
+ */
+
 /* Snackbar Container - fixed at the bottom center */
 #snackbar-container {
   position: fixed;
@@ -39,9 +48,9 @@
 
 /* Success - Matches Save Button */
 .snackbar-toast__success {
-  background-color: var(--color-emerald-50);
-  color: var(--color-emerald-600);
-  border-color: var(--color-emerald-200);
+  background-color: var(--color-green-50);
+  color: var(--color-green-600);
+  border-color: var(--color-green-200);
 }
 
 /* Error - Matches (Hypothetical) Delete/Error Button */

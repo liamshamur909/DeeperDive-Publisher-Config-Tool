@@ -1,4 +1,10 @@
-/* Main CSS Entry Point */
+/*
+ * Main CSS Entry Point
+ * 
+ * This file serves as the central hub for all CSS imports.
+ * It imports the global styles, component-specific styles, and utility classes
+ * to ensure they are bundled and applied in the correct order.
+ */
 
 /* Base/Global Styles */
 @import "./styles.css";
