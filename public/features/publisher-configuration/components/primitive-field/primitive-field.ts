@@ -9,13 +9,12 @@
  */
 
 import { Component } from "../../../../shared/interfaces.js";
-import { createElementWithClasses } from "../../../../shared/utils.js";
 
 type PrimitiveType = string | number;
 
 /**
- * Component for rendering primitive values (String, Number, Boolean).
- * Renders an input field or checkbox depending on the type.
+ * Component for rendering primitive values (String, Number).
+ * Renders a text or number input depending on the type.
  */
 export class PrimitiveField implements Component {
   /** The parent DOM element where this component will be mounted. */
@@ -49,7 +48,7 @@ export class PrimitiveField implements Component {
   }
 
   /**
-   * Renders the input element based on the value type (checkbox for boolean, text/number input otherwise).
+   * Renders the input element based on the value type.
    * Sets up event listeners for value changes.
    */
   render() {

@@ -8,9 +8,3 @@
   width: 100%;
   box-sizing: border-box;
 }
-
-/* Specific styles for checkbox if needed, but standard input is covered by base-input */
-input[type="checkbox"] {
-  accent-color: var(--input-focus-border);
-  cursor: pointer;
-}

@@ -15,7 +15,7 @@ import { BooleanField } from "../boolean-field/boolean-field.js";
 
 /**
  * Component responsible for rendering a single form field.
- * Acts as a controller that delegates rendering to PrimitiveField, ArrayField, or ObjectField
+ * Acts as a controller that delegates rendering to PrimitiveField, BooleanField, ArrayField, or ObjectField
  * based on the data type of the field value.
  */
 export class FormField implements Component {

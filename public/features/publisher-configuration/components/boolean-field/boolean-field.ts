@@ -2,7 +2,6 @@
  * Boolean Field Component
  *
  * Renders a radio button group for boolean values (True / False).
- * Replaces the previous checkbox implementation to align with
  * the form's visual structure.
  */
 
